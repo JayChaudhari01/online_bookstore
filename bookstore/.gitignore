@@ -1,0 +1,23 @@
+# .gitignore file create karein
+echo "
+# Django
+*.pyc
+*__pycache__/
+mysql
+migrations/
+
+# Environment
+venv/
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Static files (temporarily)
+/staticfiles/
+/media/
+" > .gitignore

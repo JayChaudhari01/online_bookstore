@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - BookMart Bookstore</title>
+    <link rel='stylesheet' href= {% static "css/login/style.css" %}>
+
+</head>
+<body>
+    <div class="login-container">
+        <!-- Left Side -->
+        <div class="login-branding">
+            <div class="brand-logo">📚</div>
+            <div class="brand-name">BookMart</div>
+            <div class="brand-tagline">Your Digital Library Awaits</div>
+            
+            <div class="brand-features">
+                <div class="feature">
+                    <div class="feature-icon">🔐</div>
+                    <div class="feature-text"><strong>Secure Shopping</strong> - Your data is encrypted & protected</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📖</div>
+                    <div class="feature-text"><strong>Vast Collection</strong> - Thousands of books at your fingertips</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⭐</div>
+                    <div class="feature-text"><strong>Community Reviews</strong> - Discover books loved by readers</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🚀</div>
+                    <div class="feature-text"><strong>Fast Delivery</strong> - Get your books quickly to your door</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side -->
+        <div class="login-form-container">
+            <div class="form-title">Welcome Back</div>
+            <div class="form-subtitle">Login to your Pagewise account</div>
+
+            <form method="post">
+                <!-- CSRF Token (Django) -->
+                {% csrf_token %}
+
+                <!-- Username/Email Field -->
+                <div class="form-group">
+                    <label for="id_username">Email or Username</label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                        <div class="error-message show">
+                            {{ form.username.errors.0 }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Password Field -->
+                <div class="form-group">
+                    <label for="id_password">Password</label>
+                    {{ form.password }}
+                    {% if form.password.errors %}
+                        <div class="error-message show">
+                            {{ form.password.errors.0 }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Non-field Errors -->
+                {% if form.non_field_errors %}
+                    <div class="error-message show" style="display: block; color: #dc2626;">
+                        <strong>Login Failed:</strong> {{ form.non_field_errors.0 }}
+                    </div>
+                {% endif %}
+
+                <!-- Actions -->
+                <div class="form-actions">
+                    <button type="submit">Login</button>
+                    <a href="{% url 'password_reset' %}" class="forgot-password-btn">Forgot Password?</a>
+                </div>
+
+                <!-- Footer -->
+                <div class="form-footer">
+                    <div class="signup-link">
+                        Don't have an account? <a href="{% url 'register' %}">Create one</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

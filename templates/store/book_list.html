@@ -1,0 +1,96 @@
+{% extends "store/base.html" %}
+{% load static%}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/book_list/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="library-container">
+    <!-- Library Header -->
+    <div class="library-header">
+        <h1 class="library-title">📖 Our Collection</h1>
+        <p class="library-subtitle">Discover stories that speak to your soul</p>
+    </div>
+
+    <!-- Discovery Tools -->
+    <div class="discovery-section">
+        <form method="get" class="discovery-form">
+            <div class="form-grid">
+                <div class="form-group">
+                    <select name="category" class="discovery-select">
+                        <option value="">📚 All Genres</option>
+                        {% for cat in categories %}
+                        <option value="{{ cat.id }}" {% if request.GET.category == cat.id|stringformat:"s" %}selected{% endif %}>
+                            {{ cat.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input type="number" name="min_price" placeholder="💸 Min Price" 
+                           value="{{ request.GET.min_price }}" class="discovery-input">
+                </div>
+
+                <div class="form-group">
+                    <input type="number" name="max_price" placeholder="💰 Max Price" 
+                           value="{{ request.GET.max_price }}" class="discovery-input">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="discover-btn">
+                        <span>Explore</span>
+                        <span class="search-icon">🔍</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Book Gallery -->
+    <div class="book-gallery">
+        {% if books %}
+        <div class="books-grid">
+            {% for book in books %}
+            <div class="book-card">
+                <div class="book-cover">
+                    {% if book.image %}
+                    <img src="{{ book.image.url }}" 
+                         class="book-image" 
+                         alt="{{ book.title }}">
+                    {% else %}
+                    <div class="book-placeholder">
+                        <span class="placeholder-icon">📚</span>
+                        <span class="placeholder-text">Cover Coming Soon</span>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="book-overlay">
+                        <a href="{% url 'book_detail' book.pk %}" class="preview-btn">
+                            Peek Inside
+                        </a>
+                    </div>
+                </div>
+
+                <div class="book-info">
+                    <h3 class="book-title">{{ book.title }}</h3>
+                    <p class="book-author">✍️ {{ book.author }}</p>
+                    <div class="book-meta">
+                        <span class="book-price">₹{{ book.price }}</span>
+                        <span class="book-status">Available</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-library">
+            <div class="empty-icon">📖</div>
+            <h3>No Books Found</h3>
+            <p>Try adjusting your search criteria or explore different genres</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

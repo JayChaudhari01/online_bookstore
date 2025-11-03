@@ -1,0 +1,28 @@
+{% extends 'store/base.html' %}
+{% load static%}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home/style.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="home-container">
+    <div class="welcome-section">
+        <div class="welcome-content">
+            <h1 class="welcome-title">Welcome to BookMart 📚</h1>
+            <p class="welcome-subtitle">Where every page holds a new adventure</p>
+            <p class="welcome-description">Step into our digital library - a curated collection of stories, knowledge, and imagination waiting to be explored.</p>
+            <a href="{% url 'book_list' %}" class="explore-btn">
+                <span>Begin Your Journey</span>
+                <span class="arrow">→</span>
+            </a>
+        </div>
+        <div class="welcome-decoration">
+            <div class="floating-book">📖</div>
+            <div class="floating-book">✨</div>
+            <div class="floating-book">🔍</div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

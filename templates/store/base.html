@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookMart - Your Digital Library</title>
+    {% block extra_css %}{% endblock %}
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Garamond', serif;
+            background: linear-gradient(to bottom, #fef3c7 0%, #fff7ed 100%);
+            color: #1f2937;
+        }
+
+        /* Navbar */
+        nav {
+            background: linear-gradient(135deg, #78350f 0%, #b45309 100%);
+            padding: 12px 20px;
+            box-shadow: 0 2px 8px rgba(120, 53, 15, 0.15);
+            border-bottom: 2px solid #fcd34d;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .navbar-brand:hover {
+            opacity: 0.9;
+        }
+
+        .navbar-items {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .user-greeting {
+            color: white;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 6px 12px;
+            border-radius: 4px;
+        }
+
+        .user-avatar {
+            width: 22px;
+            height: 22px;
+            background: #fcd34d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #78350f;
+            font-size: 12px;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar-container {
+                gap: 15px;
+            }
+
+            .navbar-items {
+                gap: 8px;
+            }
+
+            .nav-link,
+            .user-greeting {
+                font-size: 12px;
+                padding: 5px 8px;
+            }
+
+            .navbar-brand {
+                font-size: 16px;
+                gap: 6px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 10px 15px;
+            }
+
+            .navbar-container {
+                gap: 10px;
+            }
+
+            .navbar-items {
+                gap: 5px;
+            }
+
+            .nav-link,
+            .user-greeting {
+                font-size: 11px;
+                padding: 4px 6px;
+            }
+
+            .navbar-brand {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="navbar-container">
+            <a href="{% url 'home' %}" class="navbar-brand">
+                <span>📚</span>
+                <span>BookMart</span>
+            </a>
+            
+            <ul class="navbar-items">
+                <li><a href="{% url 'book_list' %}" class="nav-link">📖 Books</a></li>
+
+                {% if user.is_authenticated %}
+                    <li>
+                        <div class="user-greeting">
+                            <div class="user-avatar">{{ user.username|first|upper }}</div>
+                            <span>Hi, {{ user.username }}</span>
+                        </div>
+                    </li>
+                    <li><a href="{% url 'view_cart' %}" class="nav-link">🛒 Cart</a></li>
+                    <li><a href="{% url 'my_orders' %}" class="nav-link">📦 Orders</a></li>
+                    <li><a href="{% url 'logout' %}" class="nav-link">🚪 Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}" class="nav-link">🔐 Login</a></li>
+                    <li><a href="{% url 'register' %}" class="nav-link">✍️ Register</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

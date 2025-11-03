@@ -1,0 +1,99 @@
+{% extends "store/base.html" %}
+{% load static%}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/order_success/style.css' %}">
+{% endblock %}
+{% block title %}Order Successful{% endblock %}
+
+{% block content %}
+<div class="order-celebration">
+    <!-- Celebration Header -->
+    <div class="celebration-header">
+        <div class="celebration-icon">🎉</div>
+        <h1 class="celebration-title">Your Literary Journey Begins!</h1>
+        <p class="celebration-subtitle">Order Confirmed & Ready for Adventure</p>
+    </div>
+
+    <!-- Success Animation -->
+    <div class="success-animation">
+        <div class="floating-books">
+            <div class="book-float">📖</div>
+            <div class="book-float">✨</div>
+            <div class="book-float">📚</div>
+            <div class="book-float">🌟</div>
+        </div>
+    </div>
+
+    <!-- Order Details -->
+    <div class="order-details-card">
+        <div class="detail-item">
+            <span class="detail-icon">📦</span>
+            <div class="detail-content">
+                <h3>Order Processed</h3>
+                <p>Your books are being prepared with care</p>
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-icon">🚚</span>
+            <div class="detail-content">
+                <h3>Delivery Timeline</h3>
+                <p>Expected delivery in 3-5 business days</p>
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-icon">📱</span>
+            <div class="detail-content">
+                <h3>Stay Updated</h3>
+                <p>You'll receive tracking information soon</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Next Steps -->
+    <div class="next-steps">
+        <h2 class="steps-title">What's Next?</h2>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h4>Prepare Your Reading Nook</h4>
+                <p>Find that perfect cozy spot for your new books</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h4>Track Your Delivery</h4>
+                <p>Watch your books journey to your doorstep</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h4>Dive Into Stories</h4>
+                <p>Unpack and begin your reading adventure</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="celebration-actions">
+        <a href="{% url 'book_list' %}" class="continue-exploring-btn">
+            <span class="explore-icon">🔍</span>
+            <span>Continue Exploring</span>
+            <span class="explore-arrow">→</span>
+        </a>
+        
+        <a href="{% url 'my_orders' %}" class="view-orders-btn">
+            <span class="orders-icon">📋</span>
+            View My Orders
+        </a>
+    </div>
+
+    <!-- Inspirational Quote -->
+    <div class="inspiration-quote">
+        <div class="quote-icon">❝</div>
+        <p class="quote-text">The journey of a lifetime starts with the turning of a page</p>
+        <div class="quote-author">— Your Next Reading Adventure</div>
+    </div>
+</div>
+
+
+{% endblock %}

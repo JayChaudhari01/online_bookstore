@@ -1,0 +1,204 @@
+{% extends "store/base.html" %}
+{% load static%}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/checkout/style.css' %}">
+{% endblock %}
+{% block content %}
+<div class="checkout-journey">
+    <!-- Checkout Header -->
+    <div class="checkout-header">
+        <h1 class="checkout-title">📦 Finalize Your Reading Journey</h1>
+        <p class="checkout-subtitle">One step away from your new books</p>
+    </div>
+
+    {% if cart_items %}
+    <div class="checkout-layout">
+        <!-- Delivery & Payment Section -->
+        <div class="checkout-form-section">
+            <!-- Delivery Information -->
+            <div class="form-card">
+                <div class="form-card-header">
+                    <span class="form-icon">🏠</span>
+                    <h2 class="form-title">Delivery Details</h2>
+                </div>
+                
+                <form method="post" action="{% url 'checkout' %}" class="delivery-form">
+                    {% csrf_token %}
+                    
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="full_name" class="form-label">
+                                <span class="label-icon">👤</span>
+                                Full Name
+                            </label>
+                            <input type="text" name="full_name" id="full_name" class="form-input" 
+                                   placeholder="Enter your full name" required>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="address" class="form-label">
+                                <span class="label-icon">📍</span>
+                                Delivery Address
+                            </label>
+                            <textarea name="address" id="address" class="form-textarea" 
+                                      rows="3" placeholder="Where should we deliver your books?" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="city" class="form-label">
+                                <span class="label-icon">🏙️</span>
+                                City
+                            </label>
+                            <input type="text" name="city" id="city" class="form-input" 
+                                   placeholder="Your city" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pincode" class="form-label">
+                                <span class="label-icon">📮</span>
+                                Pincode
+                            </label>
+                            <input type="text" name="pincode" id="pincode" class="form-input" 
+                                   placeholder="6-digit code" required>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="phone" class="form-label">
+                                <span class="label-icon">📞</span>
+                                Contact Number
+                            </label>
+                            <input type="text" name="phone" id="phone" class="form-input" 
+                                   placeholder="For delivery updates" required>
+                        </div>
+                    </div>
+            </div>
+
+            <!-- Payment Method -->
+            <div class="form-card">
+                <div class="form-card-header">
+                    <span class="form-icon">💳</span>
+                    <h2 class="form-title">Payment Method</h2>
+                </div>
+                
+                <div class="payment-options">
+                    <div class="payment-option">
+                        <input type="radio" name="payment_method" id="cod" value="COD" class="payment-radio" checked>
+                        <label for="cod" class="payment-label">
+                            <span class="payment-icon">💰</span>
+                            <span class="payment-info">
+                                <span class="payment-name">Cash on Delivery</span>
+                                <span class="payment-desc">Pay when your books arrive</span>
+                            </span>
+                        </label>
+                    </div>
+
+                    <div class="payment-option">
+                        <input type="radio" name="payment_method" id="upi" value="UPI" class="payment-radio">
+                        <label for="upi" class="payment-label">
+                            <span class="payment-icon">📱</span>
+                            <span class="payment-info">
+                                <span class="payment-name">UPI / Netbanking</span>
+                                <span class="payment-desc">Instant digital payment</span>
+                            </span>
+                        </label>
+                    </div>
+
+                    <div class="payment-option">
+                        <input type="radio" name="payment_method" id="card" value="Card" class="payment-radio">
+                        <label for="card" class="payment-label">
+                            <span class="payment-icon">💳</span>
+                            <span class="payment-info">
+                                <span class="payment-name">Credit / Debit Card</span>
+                                <span class="payment-desc">Secure card payment</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="place-order-btn">
+                    <span class="order-icon">✨</span>
+                    <span>Place Your Order</span>
+                    <span class="order-arrow">→</span>
+                </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="order-summary-section">
+            <div class="summary-card">
+                <div class="summary-header">
+                    <h3 class="summary-title">📚 Order Summary</h3>
+                    <p class="summary-subtitle">{{ cart_items|length }} item{{ cart_items|length|pluralize }} in your order</p>
+                </div>
+
+                <div class="order-items">
+                    {% for item in cart_items %}
+                    <div class="order-item">
+                        <div class="item-visual">
+                            {% if item.book.image %}
+                            <img src="{{ item.book.image.url }}" alt="{{ item.book.title }}" class="item-image">
+                            {% else %}
+                            <div class="item-placeholder">📖</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="item-details">
+                            <h4 class="item-title">{{ item.book.title }}</h4>
+                            <p class="item-author">by {{ item.book.author }}</p>
+                            <div class="item-meta">
+                                <span class="item-quantity">Qty: {{ item.quantity }}</span>
+                                <span class="item-price">₹{{ item.book.price }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="order-totals">
+                    <div class="total-line">
+                        <span class="total-label">Items Total</span>
+                        <span class="total-value">₹{{ total|floatformat:2 }}</span>
+                    </div>
+                    
+                    <div class="total-line">
+                        <span class="total-label">Delivery</span>
+                        <span class="total-value free-delivery">FREE</span>
+                    </div>
+                    
+                    <div class="total-divider"></div>
+                    
+                    <div class="grand-total">
+                        <span class="grand-label">Total Amount</span>
+                        <span class="grand-value">₹{{ total|floatformat:2 }}</span>
+                    </div>
+                </div>
+
+                <div class="delivery-note">
+                    <div class="note-icon">🚚</div>
+                    <div class="note-content">
+                        <strong>Fast Delivery</strong>
+                        <p>Your books will arrive in 3-5 business days</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% else %}
+    <!-- Empty Cart State -->
+    <div class="empty-checkout">
+        <div class="empty-icon">📭</div>
+        <h2 class="empty-title">Your Reading Cart is Empty</h2>
+        <p class="empty-message">Add some books to begin your literary adventure</p>
+        <a href="{% url 'book_list' %}" class="browse-books-btn">
+            <span>Explore Our Collection</span>
+            <span class="browse-arrow">→</span>
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+
+{% endblock %}

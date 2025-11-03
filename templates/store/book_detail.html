@@ -1,0 +1,93 @@
+{% extends "store/base.html" %}
+{% load static%}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/book_detail/style.css' %}">
+{% endblock %}
+{% block content %}
+<div class="book-journey">
+    <!-- Book Header -->
+    <div class="book-header">
+        <a href="{% url 'book_list' %}" class="back-link">
+            <span class="back-arrow">←</span>
+            Back to Library
+        </a>
+        <h1 class="book-main-title">{{ book.title }}</h1>
+        <p class="book-subtitle">A literary journey awaits</p>
+    </div>
+
+    <!-- Book Showcase -->
+    <div class="book-showcase">
+        <!-- Book Visual -->
+        <div class="book-visual">
+            {% if book.image %}
+            <div class="book-cover-large">
+                <img src="{{ book.image.url }}" alt="{{ book.title }}" class="book-image-large">
+                <div class="cover-glow"></div>
+            </div>
+            {% else %}
+            <div class="book-cover-placeholder">
+                <span class="placeholder-icon-large">📚</span>
+                <span class="placeholder-text-large">Cover Art</span>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Book Details -->
+        <div class="book-details">
+            <div class="detail-card">
+                <h2 class="detail-title">About This Book</h2>
+                
+                <div class="detail-item">
+                    <span class="detail-label">✍️ Author</span>
+                    <span class="detail-value">{{ book.author }}</span>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-label">💰 Price</span>
+                    <span class="detail-value price-tag">₹{{ book.price }}</span>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-label">🔖 ISBN</span>
+                    <span class="detail-value isbn-code">{{ book.isbn }}</span>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <a href="{% url 'add_to_cart' book.id %}" class="add-cart-btn">
+                        <span class="cart-icon">🛒</span>
+                        <span>Add to Reading Cart</span>
+                    </a>
+                    
+                    <a href="{% url 'book_list' %}" class="browse-more-btn">
+                        <span>Continue Browsing</span>
+                        <span class="browse-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Reading Experience -->
+            <div class="reading-experience">
+                <h3 class="experience-title">📖 Reading Experience</h3>
+                <div class="experience-items">
+                    <div class="experience-item">
+                        <span class="exp-icon">✨</span>
+                        <span>Immerse yourself in this captivating story</span>
+                    </div>
+                    <div class="experience-item">
+                        <span class="exp-icon">🏷️</span>
+                        <span>Free bookmark included with every purchase</span>
+                    </div>
+                    <div class="experience-item">
+                        <span class="exp-icon">🚚</span>
+                        <span>Fast delivery to your reading nook</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+

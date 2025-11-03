@@ -1,0 +1,117 @@
+    .home-container {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+    }
+
+    .welcome-section {
+        max-width: 600px;
+        text-align: center;
+        position: relative;
+    }
+
+    .welcome-title {
+        font-size: 3rem;
+        color: #78350f;
+        margin-bottom: 1rem;
+        font-weight: normal;
+        letter-spacing: -0.5px;
+    }
+
+    .welcome-subtitle {
+        font-size: 1.4rem;
+        color: #b45309;
+        margin-bottom: 1.5rem;
+        font-style: italic;
+    }
+
+    .welcome-description {
+        font-size: 1.1rem;
+        color: #1f2937;
+        line-height: 1.6;
+        margin-bottom: 2.5rem;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .explore-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: linear-gradient(135deg, #78350f 0%, #b45309 100%);
+        color: white;
+        text-decoration: none;
+        padding: 14px 32px;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        box-shadow: 0 4px 12px rgba(120, 53, 15, 0.2);
+    }
+
+    .explore-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(120, 53, 15, 0.3);
+        border-color: #fcd34d;
+    }
+
+    .arrow {
+        transition: transform 0.3s ease;
+    }
+
+    .explore-btn:hover .arrow {
+        transform: translateX(4px);
+    }
+
+    .welcome-decoration {
+        position: absolute;
+        top: -50px;
+        right: -100px;
+        pointer-events: none;
+    }
+
+    .floating-book {
+        font-size: 2rem;
+        position: absolute;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    .floating-book:nth-child(1) {
+        top: 0;
+        right: 0;
+        animation-delay: 0s;
+    }
+
+    .floating-book:nth-child(2) {
+        top: 40px;
+        right: -60px;
+        animation-delay: 1s;
+    }
+
+    .floating-book:nth-child(3) {
+        top: -20px;
+        right: -120px;
+        animation-delay: 2s;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+
+    @media (max-width: 768px) {
+        .welcome-title {
+            font-size: 2.2rem;
+        }
+        
+        .welcome-subtitle {
+            font-size: 1.2rem;
+        }
+        
+        .welcome-decoration {
+            display: none;
+        }
+    }

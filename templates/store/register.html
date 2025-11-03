@@ -1,0 +1,219 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - BookMart Bookstore</title>
+    <link rel='stylesheet' href= {% static "css/signup/style.css" %}>
+
+ 
+</head>
+<body>
+    <div class="signup-container">
+        <!-- Header -->
+        <div class="signup-header">
+            <div class="header-logo">📚</div>
+            <div class="header-title">Join BookMart</div>
+            <div class="header-subtitle">Start exploring thousands of books today</div>
+        </div>
+
+        <!-- Content -->
+        <div class="signup-content">
+            <div class="form-intro">
+                Create your account and unlock a world of reading possibilities
+            </div>
+
+            <!-- Benefits -->
+            <div class="benefits">
+                <div class="benefit-item">
+                    <div class="benefit-icon">📖</div>
+                    <div class="benefit-text"><strong>Vast Library</strong> - Access millions of books</div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">⭐</div>
+                    <div class="benefit-text"><strong>Reviews</strong> - Discover rated books</div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">💝</div>
+                    <div class="benefit-text"><strong>Wishlist</strong> - Save favorites</div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎁</div>
+                    <div class="benefit-text"><strong>Offers</strong> - Exclusive deals</div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <form method="post">
+                {% csrf_token %}
+
+                <!-- Non-field Errors -->
+                {% if form.non_field_errors %}
+                    <div class="non-field-errors">
+                        <strong>Registration Error:</strong>
+                        <ul>
+                            {% for error in form.non_field_errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                <!-- Name Fields (Two Columns) -->
+                {% if form.first_name or form.last_name %}
+                    <div class="form-row">
+                        {% if form.first_name %}
+                            <div class="form-group">
+                                <label for="{{ form.first_name.id_for_label }}">
+                                    First Name
+                                    {% if form.first_name.field.required %}<span class="required">*</span>{% endif %}
+                                </label>
+                                {{ form.first_name }}
+                                {% if form.first_name.errors %}
+                                    <div class="error-message show">{{ form.first_name.errors.0 }}</div>
+                                {% endif %}
+                                {% if form.first_name.help_text %}
+                                    <div class="help-text">{{ form.first_name.help_text|safe }}</div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                        {% if form.last_name %}
+                            <div class="form-group">
+                                <label for="{{ form.last_name.id_for_label }}">
+                                    Last Name
+                                    {% if form.last_name.field.required %}<span class="required">*</span>{% endif %}
+                                </label>
+                                {{ form.last_name }}
+                                {% if form.last_name.errors %}
+                                    <div class="error-message show">{{ form.last_name.errors.0 }}</div>
+                                {% endif %}
+                                {% if form.last_name.help_text %}
+                                    <div class="help-text">{{ form.last_name.help_text|safe }}</div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                <!-- Email Field -->
+                {% if form.email %}
+                    <div class="form-group">
+                        <label for="{{ form.email.id_for_label }}">
+                            Email Address
+                            {% if form.email.field.required %}<span class="required">*</span>{% endif %}
+                        </label>
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                            <div class="error-message show">{{ form.email.errors.0 }}</div>
+                        {% endif %}
+                        {% if form.email.help_text %}
+                            <div class="help-text">{{ form.email.help_text|safe }}</div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                <!-- Username Field -->
+                {% if form.username %}
+                    <div class="form-group">
+                        <label for="{{ form.username.id_for_label }}">
+                            Username
+                            {% if form.username.field.required %}<span class="required">*</span>{% endif %}
+                        </label>
+                        {{ form.username }}
+                        {% if form.username.errors %}
+                            <div class="error-message show">{{ form.username.errors.0 }}</div>
+                        {% endif %}
+                        {% if form.username.help_text %}
+                            <div class="help-text">{{ form.username.help_text|safe }}</div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                <!-- Password Fields (Two Columns) -->
+                <div class="form-row">
+                    {% if form.password1 %}
+                        <div class="form-group">
+                            <label for="{{ form.password1.id_for_label }}">
+                                Password
+                                {% if form.password1.field.required %}<span class="required">*</span>{% endif %}
+                            </label>
+                            {{ form.password1 }}
+                            {% if form.password1.errors %}
+                                <div class="error-message show">{{ form.password1.errors.0 }}</div>
+                            {% endif %}
+                            {% if form.password1.help_text %}
+                                <div class="help-text">{{ form.password1.help_text|safe }}</div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    {% if form.password2 %}
+                        <div class="form-group">
+                            <label for="{{ form.password2.id_for_label }}">
+                                Confirm Password
+                                {% if form.password2.field.required %}<span class="required">*</span>{% endif %}
+                            </label>
+                            {{ form.password2 }}
+                            {% if form.password2.errors %}
+                                <div class="error-message show">{{ form.password2.errors.0 }}</div>
+                            {% endif %}
+                            {% if form.password2.help_text %}
+                                <div class="help-text">{{ form.password2.help_text|safe }}</div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Other Fields -->
+                {% for field in form %}
+                    {% if field.name not in "username email password1 password2 first_name last_name" %}
+                        <div class="form-group">
+                            {% if field.field.widget.input_type == "checkbox" %}
+                                <div class="checkbox-group">
+                                    {{ field }}
+                                    <label for="{{ field.id_for_label }}" class="checkbox-label">
+                                        {{ field.label|safe }}
+                                    </label>
+                                </div>
+                            {% else %}
+                                <label for="{{ field.id_for_label }}">
+                                    {{ field.label }}
+                                    {% if field.field.required %}<span class="required">*</span>{% endif %}
+                                </label>
+                                {{ field }}
+                            {% endif %}
+                            {% if field.errors %}
+                                <div class="error-message show">{{ field.errors.0 }}</div>
+                            {% endif %}
+                            {% if field.help_text %}
+                                <div class="help-text">{{ field.help_text|safe }}</div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                <!-- Terms & Conditions -->
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms" class="checkbox-label">
+                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                    </label>
+                </div>
+
+                <!-- Actions -->
+                <div class="form-actions">
+                    <button type="submit">Sign Up Now</button>
+                    <a href="{% url 'login' %}" class="cancel-btn">Cancel</a>
+                </div>
+
+                <!-- Footer -->
+                <div class="form-footer">
+                    <div class="login-link">
+                        Already have an account? <a href="{% url 'login' %}">Login here</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
