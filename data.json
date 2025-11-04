@@ -1,0 +1,1279 @@
+[
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2025-11-03T09:57:18.610Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "Fiction",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2025-11-03T09:58:09.132Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "1",
+    "object_repr": "The Alchemist",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2025-11-03T10:00:26.442Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "2",
+    "object_repr": "One Indian Girl",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2025-11-03T10:02:14.839Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "3",
+    "object_repr": "The God of Small Things",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2025-11-03T10:04:06.394Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "4",
+    "object_repr": "Looking for Alaska",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2025-11-03T10:06:30.529Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "5",
+    "object_repr": "The Great Gatsby",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2025-11-03T10:07:36.652Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "2",
+    "object_repr": "Academic",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2025-11-03T10:10:06.768Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "Non-Fiction",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2025-11-03T10:10:17.058Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "6",
+    "object_repr": "Sapiens: A Brief History of Humankind",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2025-11-03T10:14:25.761Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "7",
+    "object_repr": "Atomic Habits",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2025-11-03T10:16:11.428Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "8",
+    "object_repr": "Educated: A Memoir",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2025-11-03T10:19:12.881Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "9",
+    "object_repr": "A Brief History of Time",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2025-11-03T10:20:43.922Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "10",
+    "object_repr": "The Structure of Scientific Revolutions",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2025-11-03T10:22:15.008Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "11",
+    "object_repr": "The Elements of Style",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2025-11-03T18:17:27.236Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "12",
+    "object_repr": "sjsjsj",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2025-11-03T18:17:53.851Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "4",
+    "object_repr": "Order #4 by jack",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2025-11-03T18:17:53.856Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "3",
+    "object_repr": "Order #3 by jack",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2025-11-03T18:17:53.859Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "2",
+    "object_repr": "Order #2 by jack",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Status\"]}}]"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 2,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 2,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 2,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 2,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 3,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 3,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 3,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 3,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 4,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 4,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 4,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 4,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 5,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 5,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 5,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 5,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add book",
+    "content_type": 6,
+    "codename": "add_book"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change book",
+    "content_type": 6,
+    "codename": "change_book"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete book",
+    "content_type": 6,
+    "codename": "delete_book"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view book",
+    "content_type": 6,
+    "codename": "view_book"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add category",
+    "content_type": 7,
+    "codename": "add_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change category",
+    "content_type": 7,
+    "codename": "change_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete category",
+    "content_type": 7,
+    "codename": "delete_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view category",
+    "content_type": 7,
+    "codename": "view_category"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 8,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 8,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 8,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 8,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add cart item",
+    "content_type": 9,
+    "codename": "add_cartitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change cart item",
+    "content_type": 9,
+    "codename": "change_cartitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete cart item",
+    "content_type": 9,
+    "codename": "delete_cartitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view cart item",
+    "content_type": 9,
+    "codename": "view_cartitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add order",
+    "content_type": 10,
+    "codename": "add_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change order",
+    "content_type": 10,
+    "codename": "change_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete order",
+    "content_type": 10,
+    "codename": "delete_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view order",
+    "content_type": 10,
+    "codename": "view_order"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 41,
+  "fields": {
+    "name": "Can add order item",
+    "content_type": 11,
+    "codename": "add_orderitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 42,
+  "fields": {
+    "name": "Can change order item",
+    "content_type": 11,
+    "codename": "change_orderitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 43,
+  "fields": {
+    "name": "Can delete order item",
+    "content_type": 11,
+    "codename": "delete_orderitem"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 44,
+  "fields": {
+    "name": "Can view order item",
+    "content_type": 11,
+    "codename": "view_orderitem"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "store",
+    "model": "book"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "store",
+    "model": "category"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "store",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "store",
+    "model": "cartitem"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "store",
+    "model": "order"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "store",
+    "model": "orderitem"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "aq872igzxbggsuo2t8sevkzel2g93y86",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGllr_A0lfc5g7XptHECOFCcV4u4QKQW0b2beS0Tc1hq3npc4sbiIszj9boTpkdsO-I7tNss0t3WZSO6KPGiX48z5eT3cv4OKvX5rKGhVMQohAGiriwFNxIgKOYVUnCaryVHwxmuwg3EqBIcuMVmfeRDvD93sN8I:1vGBNB:gb0tLtYH1nf8hSwDsQIkgrQpRNp_z_slHWzmWL8JksA",
+    "expire_date": "2025-11-18T07:22:33.377Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "bg3wc86l30p247i8m4ohfw1536mwn3bj",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGllr_A0lfc5g7XptHECOFCcV4u4QKQW0b2beS0Tc1hq3npc4sbiIszj9boTpkdsO-I7tNss0t3WZSO6KPGiX48z5eT3cv4OKvX5rKGhVMQohAGiriwFNxIgKOYVUnCaryVHwxmuwg3EqBIcuMVmfeRDvD93sN8I:1vFw15:12gXmjnU1ki5wdOKABAH0SSq9BRt6C8J-vdIiugfVSI",
+    "expire_date": "2025-11-17T14:58:43.386Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "m5nkn5ec2a2cujt1ddmqskdo9ijytsyq",
+  "fields": {
+    "session_data": ".eJxVjMsOwiAURP-FtSGXN7p07zeQCxekaiAp7cr477ZJF7qbzDkzbxZwXWpYR57DROzCFDv9dhHTM7cd0APbvfPU2zJPke8KP-jgt075dT3cv4OKo25rqa0QaMCkJAmsNUpFoih8FkDgc3HoilfgFFIRIkVNOhZpYEvqDIV9vtVtN98:1vGEU6:hy5e0xaQvNjvx94220aUSsr2XqQqDlzI8DBPlneh6TQ",
+    "expire_date": "2025-11-18T10:41:54.046Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "nfuu2988if8eqoeaz7atypmehukf3tsc",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGllr_A0lfc5g7XptHECOFCcV4u4QKQW0b2beS0Tc1hq3npc4sbiIszj9boTpkdsO-I7tNss0t3WZSO6KPGiX48z5eT3cv4OKvX5rKGhVMQohAGiriwFNxIgKOYVUnCaryVHwxmuwg3EqBIcuMVmfeRDvD93sN8I:1vFw15:12gXmjnU1ki5wdOKABAH0SSq9BRt6C8J-vdIiugfVSI",
+    "expire_date": "2025-11-17T14:58:43.149Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "uyt9yhsblqdy26sp9n4v1rowwqxvgq9m",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGllr_A0lfc5g7XptHECOFCcV4u4QKQW0b2beS0Tc1hq3npc4sbiIszj9boTpkdsO-I7tNss0t3WZSO6KPGiX48z5eT3cv4OKvX5rKGhVMQohAGiriwFNxIgKOYVUnCaryVHwxmuwg3EqBIcuMVmfeRDvD93sN8I:1vGIpg:fjoZ8LhBGWeF5wBTyKaNdAC-24cEkxBKB0SdficB-7I",
+    "expire_date": "2025-11-18T15:20:28.317Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "vudcbsenp3wbc6b4jxzyannsqdgboca7",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGllr_A0lfc5g7XptHECOFCcV4u4QKQW0b2beS0Tc1hq3npc4sbiIszj9boTpkdsO-I7tNss0t3WZSO6KPGiX48z5eT3cv4OKvX5rKGhVMQohAGiriwFNxIgKOYVUnCaryVHwxmuwg3EqBIcuMVmfeRDvD93sN8I:1vFvvP:QasVSwHnu0T_cmsDEivlANRnY4NYIsShKSRBag_mUlw",
+    "expire_date": "2025-11-17T14:52:51.759Z"
+  }
+},
+{
+  "model": "store.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$WX7DjAo49DxCG6g8FJSRtN$Qa1v3ptIttaEZnAbTdZkBdO8+kZMOP89mLkZAd3a9ug=",
+    "last_login": "2025-11-04T10:33:49.287Z",
+    "is_superuser": true,
+    "username": "root",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-11-03T09:52:52.715Z",
+    "phone": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "store.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$EmeNoNq3cmoFnShxMIO8Tr$vb4dPJhpza6YTtLDrpyNWHC5QiudvVhbjw0fthkEjSA=",
+    "last_login": "2025-11-04T15:20:28.306Z",
+    "is_superuser": false,
+    "username": "jack",
+    "first_name": "Jack",
+    "last_name": "odinson",
+    "email": "jack@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-03T10:24:44.821Z",
+    "phone": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "store.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$eWDodRyR670pkqaVuBKkMj$Gejs/wLa6rodQkLNIHK1RrQF/o+gYz14dBkkyVBKZvE=",
+    "last_login": "2025-11-04T10:41:54.037Z",
+    "is_superuser": false,
+    "username": "Avinash_01",
+    "first_name": "avinash",
+    "last_name": "Chaudhari",
+    "email": "avinash@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-11-04T10:33:24.084Z",
+    "phone": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "store.category",
+  "pk": 1,
+  "fields": {
+    "name": "Fiction"
+  }
+},
+{
+  "model": "store.category",
+  "pk": 2,
+  "fields": {
+    "name": "Academic"
+  }
+},
+{
+  "model": "store.category",
+  "pk": 3,
+  "fields": {
+    "name": "Non-Fiction"
+  }
+},
+{
+  "model": "store.book",
+  "pk": 1,
+  "fields": {
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "description": "A mystical tale of Santiago, a shepherd boy who dreams of finding treasure in Egypt, exploring destiny and personal legend.",
+    "price": "167.00",
+    "isbn": "9780061122415",
+    "category": 1,
+    "image": "book_images/OIP_1.webp"
+  }
+},
+{
+  "model": "store.book",
+  "pk": 2,
+  "fields": {
+    "title": "One Indian Girl",
+    "author": "Chetan Bhagat",
+    "description": "A witty and emotional story of Radhika Mehta, a high-flying banker navigating love, ambition, and societal expectations.",
+    "price": "204.00",
+    "isbn": "9788129142146",
+    "category": 1,
+    "image": "book_images/md_9788129142146.jpg"
+  }
+},
+{
+  "model": "store.book",
+  "pk": 3,
+  "fields": {
+    "title": "The God of Small Things",
+    "author": "Arundhati Roy",
+    "description": "A lyrical novel set in Kerala, unraveling family secrets and caste politics through the eyes of twins Estha and Rahel.",
+    "price": "419.00",
+    "isbn": "9780679457312",
+    "category": 1,
+    "image": "book_images/the-god-of-small-things-2.jpg"
+  }
+},
+{
+  "model": "store.book",
+  "pk": 4,
+  "fields": {
+    "title": "Looking for Alaska",
+    "author": "John Green",
+    "description": "A coming-of-age story about love, loss, and self-discovery at a boarding school in Alabama.",
+    "price": "243.00",
+    "isbn": "9780142402511",
+    "category": 1,
+    "image": "book_images/OIP_2.webp"
+  }
+},
+{
+  "model": "store.book",
+  "pk": 5,
+  "fields": {
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "description": "A classic tale of wealth, illusion, and the American Dream set in the roaring 1920s.",
+    "price": "142.00",
+    "isbn": "9780743273565",
+    "category": 1,
+    "image": "book_images/OIP_3.webp"
+  }
+},
+{
+  "model": "store.book",
+  "pk": 6,
+  "fields": {
+    "title": "Sapiens: A Brief History of Humankind",
+    "author": "Yuval Noah Harari",
+    "description": "A sweeping exploration of human evolution, society, and culture from prehistoric times to the modern age",
+    "price": "499.00",
+    "isbn": "9780062316097",
+    "category": 3,
+    "image": "book_images/OIP_4.webp"
+  }
+},
+{
+  "model": "store.book",
+  "pk": 7,
+  "fields": {
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "description": "Offers a practical framework for building good habits and breaking bad ones through small, consistent changes.",
+    "price": "175.00",
+    "isbn": "9781634560948",
+    "category": 3,
+    "image": "book_images/C2C70CC4-C2DE-4BE5-83E5-628F59496D68.png"
+  }
+},
+{
+  "model": "store.book",
+  "pk": 8,
+  "fields": {
+    "title": "Educated: A Memoir",
+    "author": "Tara Westover",
+    "description": "A memoir of a woman raised in a survivalist family who escapes through education, eventually earning a PhD from Cambridge.",
+    "price": "453.00",
+    "isbn": "9780399590528",
+    "category": 3,
+    "image": "book_images/43cb27_07afffae83ad42cbaa7f4d749b67a225mv2.avif"
+  }
+},
+{
+  "model": "store.book",
+  "pk": 9,
+  "fields": {
+    "title": "A Brief History of Time",
+    "author": "Stephen Hawking",
+    "description": "A landmark work explaining cosmology, black holes, and the nature of time for general readers.",
+    "price": "1454.00",
+    "isbn": "9780553380163",
+    "category": 2,
+    "image": "book_images/OIP_6.webp"
+  }
+},
+{
+  "model": "store.book",
+  "pk": 10,
+  "fields": {
+    "title": "The Structure of Scientific Revolutions",
+    "author": "Thomas S. Kuhn",
+    "description": "",
+    "price": "1182.00",
+    "isbn": "9780226458120",
+    "category": 2,
+    "image": "book_images/R.jpg"
+  }
+},
+{
+  "model": "store.book",
+  "pk": 11,
+  "fields": {
+    "title": "The Elements of Style",
+    "author": "William Strunk Jr. & E.B. White",
+    "description": "",
+    "price": "94.00",
+    "isbn": "9788119972244",
+    "category": 2,
+    "image": "book_images/71JUy5P9VkL._SL1500_.jpg"
+  }
+},
+{
+  "model": "store.cartitem",
+  "pk": 16,
+  "fields": {
+    "user": 1,
+    "book": 2,
+    "quantity": 1
+  }
+},
+{
+  "model": "store.cartitem",
+  "pk": 19,
+  "fields": {
+    "user": 2,
+    "book": 2,
+    "quantity": 2
+  }
+},
+{
+  "model": "store.order",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "full_name": "ManavTamore",
+    "address": "q",
+    "city": "Palghar",
+    "pincode": "401501",
+    "phone": "08421008675",
+    "payment_method": "Card",
+    "total": "1319.00",
+    "status": "Pending",
+    "created_at": "2025-11-03T10:23:22.502Z"
+  }
+},
+{
+  "model": "store.order",
+  "pk": 2,
+  "fields": {
+    "user": 2,
+    "full_name": "ManavTamore",
+    "address": "aa",
+    "city": "Palghar",
+    "pincode": "401501",
+    "phone": "08421008675",
+    "payment_method": "UPI",
+    "total": "1454.00",
+    "status": "Cancelled",
+    "created_at": "2025-11-03T13:57:02.841Z"
+  }
+},
+{
+  "model": "store.order",
+  "pk": 3,
+  "fields": {
+    "user": 2,
+    "full_name": "ManavTamore",
+    "address": "ahah",
+    "city": "Palghar",
+    "pincode": "401501",
+    "phone": "08421008675",
+    "payment_method": "UPI",
+    "total": "334.00",
+    "status": "Delivered",
+    "created_at": "2025-11-03T16:34:29.079Z"
+  }
+},
+{
+  "model": "store.order",
+  "pk": 4,
+  "fields": {
+    "user": 2,
+    "full_name": "ManavTamore",
+    "address": "a",
+    "city": "Palghar",
+    "pincode": "401501",
+    "phone": "08421008675",
+    "payment_method": "COD",
+    "total": "1349.00",
+    "status": "Shipped",
+    "created_at": "2025-11-03T18:10:31.930Z"
+  }
+},
+{
+  "model": "store.order",
+  "pk": 5,
+  "fields": {
+    "user": 2,
+    "full_name": "ManavTamore",
+    "address": "At post Murbe ,Boisar ,palghar",
+    "city": "Palghar",
+    "pincode": "401501",
+    "phone": "08421008675",
+    "payment_method": "UPI",
+    "total": "371.00",
+    "status": "Pending",
+    "created_at": "2025-11-04T07:23:20.109Z"
+  }
+},
+{
+  "model": "store.order",
+  "pk": 6,
+  "fields": {
+    "user": 3,
+    "full_name": "ManavTamore",
+    "address": "At post Murbe ,Boisar ,palghar",
+    "city": "Palghar",
+    "pincode": "401501",
+    "phone": "08421008675",
+    "payment_method": "Card",
+    "total": "419.00",
+    "status": "Pending",
+    "created_at": "2025-11-04T10:34:56.548Z"
+  }
+},
+{
+  "model": "store.order",
+  "pk": 7,
+  "fields": {
+    "user": 3,
+    "full_name": "avinash Chaudhari",
+    "address": "At post Murbe ,Boisar ,palghar",
+    "city": "Palghar",
+    "pincode": "401501",
+    "phone": "9209818202",
+    "payment_method": "COD",
+    "total": "2777.00",
+    "status": "Pending",
+    "created_at": "2025-11-04T10:43:57.014Z"
+  }
+},
+{
+  "model": "store.orderitem",
+  "pk": 1,
+  "fields": {
+    "order": 1,
+    "book": 2,
+    "quantity": 1,
+    "price": "204.00"
+  }
+},
+{
+  "model": "store.orderitem",
+  "pk": 2,
+  "fields": {
+    "order": 1,
+    "book": 3,
+    "quantity": 1,
+    "price": "419.00"
+  }
+},
+{
+  "model": "store.orderitem",
+  "pk": 3,
+  "fields": {
+    "order": 1,
+    "book": 4,
+    "quantity": 1,
+    "price": "243.00"
+  }
+},
+{
+  "model": "store.orderitem",
+  "pk": 4,
+  "fields": {
+    "order": 1,
+    "book": 8,
+    "quantity": 1,
+    "price": "453.00"
+  }
+},
+{
+  "model": "store.orderitem",
+  "pk": 5,
+  "fields": {
+    "order": 2,
+    "book": 9,
+    "quantity": 1,
+    "price": "1454.00"
+  }
+},
+{
+  "model": "store.orderitem",
+  "pk": 6,
+  "fields": {
+    "order": 3,
+    "book": 1,
+    "quantity": 2,
+    "price": "167.00"
+  }
+},
+{
+  "model": "store.orderitem",
+  "pk": 7,
+  "fields": {
+    "order": 4,
+    "book": 10,
+    "quantity": 1,
+    "price": "1182.00"
+  }
+},
+{
+  "model": "store.orderitem",
+  "pk": 8,
+  "fields": {
+    "order": 4,
+    "book": 1,
+    "quantity": 1,
+    "price": "167.00"
+  }
+},
+{
+  "model": "store.orderitem",
+  "pk": 9,
+  "fields": {
+    "order": 5,
+    "book": 1,
+    "quantity": 1,
+    "price": "167.00"
+  }
+},
+{
+  "model": "store.orderitem",
+  "pk": 10,
+  "fields": {
+    "order": 5,
+    "book": 2,
+    "quantity": 1,
+    "price": "204.00"
+  }
+},
+{
+  "model": "store.orderitem",
+  "pk": 11,
+  "fields": {
+    "order": 6,
+    "book": 3,
+    "quantity": 1,
+    "price": "419.00"
+  }
+},
+{
+  "model": "store.orderitem",
+  "pk": 12,
+  "fields": {
+    "order": 7,
+    "book": 1,
+    "quantity": 1,
+    "price": "167.00"
+  }
+},
+{
+  "model": "store.orderitem",
+  "pk": 13,
+  "fields": {
+    "order": 7,
+    "book": 6,
+    "quantity": 1,
+    "price": "499.00"
+  }
+},
+{
+  "model": "store.orderitem",
+  "pk": 14,
+  "fields": {
+    "order": 7,
+    "book": 9,
+    "quantity": 1,
+    "price": "1454.00"
+  }
+},
+{
+  "model": "store.orderitem",
+  "pk": 15,
+  "fields": {
+    "order": 7,
+    "book": 2,
+    "quantity": 1,
+    "price": "204.00"
+  }
+},
+{
+  "model": "store.orderitem",
+  "pk": 16,
+  "fields": {
+    "order": 7,
+    "book": 8,
+    "quantity": 1,
+    "price": "453.00"
+  }
+}
+]
