@@ -34,7 +34,7 @@ def book_list(request):
             max_price = int(max_price)
             books = books.filter(price__gte=min_price, price__lte=max_price)
         except ValueError:
-            pass  # agar invalid input ho toh ignore karein
+            pass  
 
     return render(request, "store/book_list.html", {
         "books": books,
@@ -94,9 +94,7 @@ def user_logout(request):
 
 
 
-# -----------------------------
-# View Cart Page
-# -----------------------------
+
 @login_required
 def view_cart(request):
     cart_items = CartItem.objects.filter(user=request.user)
@@ -104,9 +102,7 @@ def view_cart(request):
     return render(request, "store/cart.html", {"cart_items": cart_items, "total_price": total_price})
 
 
-# -----------------------------
-# Add Book to Cart
-# -----------------------------
+
 @login_required
 def add_to_cart(request, book_id):
     book = get_object_or_404(Book, id=book_id)
@@ -119,12 +115,10 @@ def add_to_cart(request, book_id):
     else:
         messages.success(request, f"'{book.title}' added to your cart")
 
-    return redirect("view_cart")  # make sure you have a URL named 'view_cart'
+    return redirect("view_cart")  
 
 
-# -----------------------------
-# Update Quantity
-# -----------------------------
+
 @login_required
 def update_cart(request, item_id):
     cart_item = get_object_or_404(CartItem, id=item_id, user=request.user)
@@ -140,9 +134,7 @@ def update_cart(request, item_id):
     return redirect("view_cart")
 
 
-# -----------------------------
-# Delete Item from Cart
-# -----------------------------
+
 @login_required
 def delete_from_cart(request, item_id):
     cart_item = get_object_or_404(CartItem, id=item_id, user=request.user)
@@ -185,7 +177,6 @@ def checkout(request):
                 price=item.book.price
             )
 
-        # Clear cart after successful checkout
         cart_items.delete()
 
         messages.success(request, "Your order has been placed successfully!")
