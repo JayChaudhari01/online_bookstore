@@ -8,23 +8,19 @@ from .forms import BookForm , SignupForm
 
 
 
-# Home Page
 def home(request):
     return render(request, "store/home.html")
 
-# Book List
 
 
 def book_list(request):
     books = Book.objects.all()
     categories = Category.objects.all()
 
-    # category filter
     category_id = request.GET.get("category")
     if category_id:
         books = books.filter(category_id=category_id)
 
-    # price filter
     min_price = request.GET.get("min_price")
     max_price = request.GET.get("max_price")
 
@@ -42,12 +38,11 @@ def book_list(request):
     })
 
 
-# Book Detail
 def book_detail(request, pk):
     book = get_object_or_404(Book, pk=pk)
     return render(request, "store/book_detail.html", {"book": book})
 
-# Add Book
+
 @login_required
 def add_book(request):
     if request.method == "POST":
@@ -59,7 +54,7 @@ def add_book(request):
         form = BookForm()
     return render(request, "store/add_book.html", {"form": form})
 
-# Register
+
 def register(request):
     if request.method == "POST":
         form = SignupForm(request.POST)
@@ -71,7 +66,7 @@ def register(request):
         form = SignupForm()
     return render(request, "store/register.html", {"form": form})
 
-# Login
+
 def user_login(request):
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
@@ -86,7 +81,7 @@ def user_login(request):
         form = AuthenticationForm()
     return render(request, "store/login.html", {"form": form})
 
-# Logout
+
 def user_logout(request):
     logout(request)
     return redirect("home")
