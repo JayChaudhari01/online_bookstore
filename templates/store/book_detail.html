@@ -53,7 +53,8 @@
                 </div>
 
                 <!-- Action Buttons -->
-    {% if user.is_authenticated %}
+                 <div class="action-buttons">
+                 {% if user.is_authenticated %}
              <a href="{% url 'add_to_cart' book.id %}" class="add-cart-btn">
              <span class="cart-icon">🛒</span>
              <span>Add to Reading Cart</span>
