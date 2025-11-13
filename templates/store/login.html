@@ -4,90 +4,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - BookMart Bookstore</title>
-    <link rel='stylesheet' href= {% static "css/login/style.css" %}>
-
+    <title>Sign In - BookMart</title>
+    <link rel='stylesheet' href="{% static 'css/login/style.css' %}">
 </head>
 <body>
-    <div class="login-container">
-        <!-- Left Side -->
-        <div class="login-branding">
-            <div class="brand-logo">📚</div>
-            <div class="brand-name">BookMart</div>
-            <div class="brand-tagline">Your Digital Library Awaits</div>
-            
-            <div class="brand-features">
-                <div class="feature">
-                    <div class="feature-icon">🔐</div>
-                    <div class="feature-text"><strong>Secure Shopping</strong> - Your data is encrypted & protected</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">📖</div>
-                    <div class="feature-text"><strong>Vast Collection</strong> - Thousands of books at your fingertips</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">⭐</div>
-                    <div class="feature-text"><strong>Community Reviews</strong> - Discover books loved by readers</div>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">🚀</div>
-                    <div class="feature-text"><strong>Fast Delivery</strong> - Get your books quickly to your door</div>
+    <div class="login-page">
+        <!-- Logo Header -->
+        <div class="page-logo">
+            <a href="{% url 'home' %}">
+                <span class="logo-text">BookMart</span>
+            </a>
+        </div>
+
+        <!-- Login Container -->
+        <div class="login-container">
+            <div class="login-card">
+                <h1 class="card-title">Sign in</h1>
+
+                <!-- Form -->
+                <form method="post" class="login-form">
+                    {% csrf_token %}
+
+                    <!-- Non-field Errors -->
+                    {% if form.non_field_errors %}
+                    <div class="alert alert-error">
+                        {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <!-- Username/Email Field -->
+                    <div class="form-group">
+                        <label for="{{ form.username.id_for_label }}">Email or mobile phone number</label>
+                        {{ form.username }}
+                        {% if form.username.errors %}
+                        <span class="error-text">{{ form.username.errors.0 }}</span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="form-group">
+                        <div class="label-row">
+                            <label for="{{ form.password.id_for_label }}">Password</label>
+                            <a href="{% url 'password_reset' %}" class="forgot-link">Forgot password?</a>
+                        </div>
+                        {{ form.password }}
+                        {% if form.password.errors %}
+                        <span class="error-text">{{ form.password.errors.0 }}</span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-primary">Sign in</button>
+
+                    <!-- Terms -->
+                    <p class="terms-text">
+                        By continuing, you agree to BookMart's 
+                        <a href="#">Conditions of Use</a> and <a href="#">Privacy Notice</a>.
+                    </p>
+                </form>
+
+                <!-- Help Section -->
+                <div class="help-section">
+                    <span class="help-icon">▼</span>
+                    <a href="#" class="help-link">Need help?</a>
                 </div>
             </div>
+
+            <!-- Divider -->
+            <div class="divider">
+                <span>New to BookMart?</span>
+            </div>
+
+            <!-- Create Account Button -->
+            <a href="{% url 'register' %}" class="btn-secondary">Create your BookMart account</a>
         </div>
 
-        <!-- Right Side -->
-        <div class="login-form-container">
-            <div class="form-title">Welcome Back</div>
-            <div class="form-subtitle">Login to your Pagewise account</div>
-
-            <form method="post">
-                <!-- CSRF Token (Django) -->
-                {% csrf_token %}
-
-                <!-- Username/Email Field -->
-                <div class="form-group">
-                    <label for="id_username">Email or Username</label>
-                    {{ form.username }}
-                    {% if form.username.errors %}
-                        <div class="error-message show">
-                            {{ form.username.errors.0 }}
-                        </div>
-                    {% endif %}
-                </div>
-
-                <!-- Password Field -->
-                <div class="form-group">
-                    <label for="id_password">Password</label>
-                    {{ form.password }}
-                    {% if form.password.errors %}
-                        <div class="error-message show">
-                            {{ form.password.errors.0 }}
-                        </div>
-                    {% endif %}
-                </div>
-
-                <!-- Non-field Errors -->
-                {% if form.non_field_errors %}
-                    <div class="error-message show" style="display: block; color: #dc2626;">
-                        <strong>Login Failed:</strong> {{ form.non_field_errors.0 }}
-                    </div>
-                {% endif %}
-
-                <!-- Actions -->
-                <div class="form-actions">
-                    <button type="submit">Login</button>
-                    <a href="{% url 'password_reset' %}" class="forgot-password-btn">Forgot Password?</a>
-                </div>
-
-                <!-- Footer -->
-                <div class="form-footer">
-                    <div class="signup-link">
-                        Don't have an account? <a href="{% url 'register' %}">Create one</a>
-                    </div>
-                </div>
-            </form>
-        </div>
+        <!-- Footer -->
+        <footer class="page-footer">
+            <div class="footer-links">
+                <a href="#">Conditions of Use</a>
+                <a href="#">Privacy Notice</a>
+                <a href="#">Help</a>
+            </div>
+            <p class="footer-copyright">© 2024 BookMart. All rights reserved.</p>
+        </footer>
     </div>
 </body>
 </html>

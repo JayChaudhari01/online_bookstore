@@ -17,20 +17,31 @@ def book_list(request):
     books = Book.objects.all()
     categories = Category.objects.all()
 
-    category_id = request.GET.get("category")
-    if category_id:
-        books = books.filter(category_id=category_id)
+    # Category filtering by NAME (not ID)
+    category_name = request.GET.get("category")
+    if category_name:
+        books = books.filter(category__name__iexact=category_name)
+        # ya agar lowercase slug type field hai toh:
+        # books = books.filter(category__name__icontains=category_name)
 
+    # Price filtering
     min_price = request.GET.get("min_price")
     max_price = request.GET.get("max_price")
-
+    
     if min_price and max_price:
         try:
             min_price = int(min_price)
             max_price = int(max_price)
             books = books.filter(price__gte=min_price, price__lte=max_price)
         except ValueError:
-            pass  
+            pass
+
+    # Sort filtering
+    sort_by = request.GET.get("sort")
+    if sort_by == "bestseller":
+        books = books.order_by('-id')  # ya tumhara bestseller logic
+    elif sort_by == "new":
+        books = books.order_by('-id')  # ya '-id' for latest
 
     return render(request, "store/book_list.html", {
         "books": books,

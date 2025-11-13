@@ -4,216 +4,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - BookMart Bookstore</title>
-    <link rel='stylesheet' href= {% static "css/signup/style.css" %}>
-
- 
+    <title>Create Account - BookMart</title>
+    <link rel='stylesheet' href="{% static 'css/signup/style.css' %}">
 </head>
 <body>
-    <div class="signup-container">
-        <!-- Header -->
-        <div class="signup-header">
-            <div class="header-logo">📚</div>
-            <div class="header-title">Join BookMart</div>
-            <div class="header-subtitle">Start exploring thousands of books today</div>
+    <div class="register-page">
+        <!-- Logo Header -->
+        <div class="page-logo">
+            <a href="{% url 'home' %}">
+                <span class="logo-text">BookMart</span>
+            </a>
         </div>
 
-        <!-- Content -->
-        <div class="signup-content">
-            <div class="form-intro">
-                Create your account and unlock a world of reading possibilities
-            </div>
+        <!-- Registration Container -->
+        <div class="register-container">
+            <div class="register-card">
+                <h1 class="card-title">Create Account</h1>
 
-            <!-- Benefits -->
-            <div class="benefits">
-                <div class="benefit-item">
-                    <div class="benefit-icon">📖</div>
-                    <div class="benefit-text"><strong>Vast Library</strong> - Access millions of books</div>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">⭐</div>
-                    <div class="benefit-text"><strong>Reviews</strong> - Discover rated books</div>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">💝</div>
-                    <div class="benefit-text"><strong>Wishlist</strong> - Save favorites</div>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">🎁</div>
-                    <div class="benefit-text"><strong>Offers</strong> - Exclusive deals</div>
-                </div>
-            </div>
+                <!-- Form -->
+                <form method="post" class="register-form">
+                    {% csrf_token %}
 
-            <!-- Form -->
-            <form method="post">
-                {% csrf_token %}
-
-                <!-- Non-field Errors -->
-                {% if form.non_field_errors %}
-                    <div class="non-field-errors">
-                        <strong>Registration Error:</strong>
-                        <ul>
-                            {% for error in form.non_field_errors %}
-                                <li>{{ error }}</li>
-                            {% endfor %}
-                        </ul>
+                    <!-- Non-field Errors -->
+                    {% if form.non_field_errors %}
+                    <div class="alert alert-error">
+                        {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                        {% endfor %}
                     </div>
-                {% endif %}
+                    {% endif %}
 
-                <!-- Name Fields (Two Columns) -->
-                {% if form.first_name or form.last_name %}
+                    <!-- Name Fields -->
+                    {% if form.first_name or form.last_name %}
                     <div class="form-row">
                         {% if form.first_name %}
-                            <div class="form-group">
-                                <label for="{{ form.first_name.id_for_label }}">
-                                    First Name
-                                    {% if form.first_name.field.required %}<span class="required">*</span>{% endif %}
-                                </label>
-                                {{ form.first_name }}
-                                {% if form.first_name.errors %}
-                                    <div class="error-message show">{{ form.first_name.errors.0 }}</div>
-                                {% endif %}
-                                {% if form.first_name.help_text %}
-                                    <div class="help-text">{{ form.first_name.help_text|safe }}</div>
-                                {% endif %}
-                            </div>
+                        <div class="form-group">
+                            <label for="{{ form.first_name.id_for_label }}">First Name{% if form.first_name.field.required %} *{% endif %}</label>
+                            {{ form.first_name }}
+                            {% if form.first_name.errors %}
+                            <span class="error-text">{{ form.first_name.errors.0 }}</span>
+                            {% endif %}
+                        </div>
                         {% endif %}
                         {% if form.last_name %}
-                            <div class="form-group">
-                                <label for="{{ form.last_name.id_for_label }}">
-                                    Last Name
-                                    {% if form.last_name.field.required %}<span class="required">*</span>{% endif %}
-                                </label>
-                                {{ form.last_name }}
-                                {% if form.last_name.errors %}
-                                    <div class="error-message show">{{ form.last_name.errors.0 }}</div>
-                                {% endif %}
-                                {% if form.last_name.help_text %}
-                                    <div class="help-text">{{ form.last_name.help_text|safe }}</div>
-                                {% endif %}
-                            </div>
+                        <div class="form-group">
+                            <label for="{{ form.last_name.id_for_label }}">Last Name{% if form.last_name.field.required %} *{% endif %}</label>
+                            {{ form.last_name }}
+                            {% if form.last_name.errors %}
+                            <span class="error-text">{{ form.last_name.errors.0 }}</span>
+                            {% endif %}
+                        </div>
                         {% endif %}
                     </div>
-                {% endif %}
+                    {% endif %}
 
-                <!-- Email Field -->
-                {% if form.email %}
+                    <!-- Email Field -->
+                    {% if form.email %}
                     <div class="form-group">
-                        <label for="{{ form.email.id_for_label }}">
-                            Email Address
-                            {% if form.email.field.required %}<span class="required">*</span>{% endif %}
-                        </label>
+                        <label for="{{ form.email.id_for_label }}">Email{% if form.email.field.required %} *{% endif %}</label>
                         {{ form.email }}
                         {% if form.email.errors %}
-                            <div class="error-message show">{{ form.email.errors.0 }}</div>
-                        {% endif %}
-                        {% if form.email.help_text %}
-                            <div class="help-text">{{ form.email.help_text|safe }}</div>
+                        <span class="error-text">{{ form.email.errors.0 }}</span>
                         {% endif %}
                     </div>
-                {% endif %}
+                    {% endif %}
 
-                <!-- Username Field -->
-                {% if form.username %}
+                    <!-- Username Field -->
+                    {% if form.username %}
                     <div class="form-group">
-                        <label for="{{ form.username.id_for_label }}">
-                            Username
-                            {% if form.username.field.required %}<span class="required">*</span>{% endif %}
-                        </label>
+                        <label for="{{ form.username.id_for_label }}">Username{% if form.username.field.required %} *{% endif %}</label>
                         {{ form.username }}
                         {% if form.username.errors %}
-                            <div class="error-message show">{{ form.username.errors.0 }}</div>
-                        {% endif %}
-                        {% if form.username.help_text %}
-                            <div class="help-text">{{ form.username.help_text|safe }}</div>
+                        <span class="error-text">{{ form.username.errors.0 }}</span>
+                        {% else %}
+                        <span class="help-text">Use letters, numbers, and underscores only</span>
                         {% endif %}
                     </div>
-                {% endif %}
+                    {% endif %}
 
-                <!-- Password Fields (Two Columns) -->
-                <div class="form-row">
+                    <!-- Password Fields -->
                     {% if form.password1 %}
-                        <div class="form-group">
-                            <label for="{{ form.password1.id_for_label }}">
-                                Password
-                                {% if form.password1.field.required %}<span class="required">*</span>{% endif %}
-                            </label>
-                            {{ form.password1 }}
-                            {% if form.password1.errors %}
-                                <div class="error-message show">{{ form.password1.errors.0 }}</div>
-                            {% endif %}
-                            {% if form.password1.help_text %}
-                                <div class="help-text">{{ form.password1.help_text|safe }}</div>
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                    {% if form.password2 %}
-                        <div class="form-group">
-                            <label for="{{ form.password2.id_for_label }}">
-                                Confirm Password
-                                {% if form.password2.field.required %}<span class="required">*</span>{% endif %}
-                            </label>
-                            {{ form.password2 }}
-                            {% if form.password2.errors %}
-                                <div class="error-message show">{{ form.password2.errors.0 }}</div>
-                            {% endif %}
-                            {% if form.password2.help_text %}
-                                <div class="help-text">{{ form.password2.help_text|safe }}</div>
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                </div>
-
-                <!-- Other Fields -->
-                {% for field in form %}
-                    {% if field.name not in "username email password1 password2 first_name last_name" %}
-                        <div class="form-group">
-                            {% if field.field.widget.input_type == "checkbox" %}
-                                <div class="checkbox-group">
-                                    {{ field }}
-                                    <label for="{{ field.id_for_label }}" class="checkbox-label">
-                                        {{ field.label|safe }}
-                                    </label>
-                                </div>
-                            {% else %}
-                                <label for="{{ field.id_for_label }}">
-                                    {{ field.label }}
-                                    {% if field.field.required %}<span class="required">*</span>{% endif %}
-                                </label>
-                                {{ field }}
-                            {% endif %}
-                            {% if field.errors %}
-                                <div class="error-message show">{{ field.errors.0 }}</div>
-                            {% endif %}
-                            {% if field.help_text %}
-                                <div class="help-text">{{ field.help_text|safe }}</div>
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                {% endfor %}
-
-                <!-- Terms & Conditions -->
-                <div class="checkbox-group">
-                    <input type="checkbox" id="terms" name="terms" required>
-                    <label for="terms" class="checkbox-label">
-                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
-                    </label>
-                </div>
-
-                <!-- Actions -->
-                <div class="form-actions">
-                    <button type="submit">Sign Up Now</button>
-                    <a href="{% url 'login' %}" class="cancel-btn">Cancel</a>
-                </div>
-
-                <!-- Footer -->
-                <div class="form-footer">
-                    <div class="login-link">
-                        Already have an account? <a href="{% url 'login' %}">Login here</a>
+                    <div class="form-group">
+                        <label for="{{ form.password1.id_for_label }}">Password{% if form.password1.field.required %} *{% endif %}</label>
+                        {{ form.password1 }}
+                        {% if form.password1.errors %}
+                        <span class="error-text">{{ form.password1.errors.0 }}</span>
+                        {% else %}
+                        <span class="help-text">Minimum 8 characters</span>
+                        {% endif %}
                     </div>
+                    {% endif %}
+
+                    {% if form.password2 %}
+                    <div class="form-group">
+                        <label for="{{ form.password2.id_for_label }}">Re-enter password{% if form.password2.field.required %} *{% endif %}</label>
+                        {{ form.password2 }}
+                        {% if form.password2.errors %}
+                        <span class="error-text">{{ form.password2.errors.0 }}</span>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+
+                    <!-- Other Fields -->
+                    {% for field in form %}
+                    {% if field.name not in "username email password1 password2 first_name last_name" %}
+                    <div class="form-group">
+                        {% if field.field.widget.input_type == "checkbox" %}
+                        <div class="checkbox-wrapper">
+                            {{ field }}
+                            <label for="{{ field.id_for_label }}">{{ field.label|safe }}</label>
+                        </div>
+                        {% else %}
+                        <label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %} *{% endif %}</label>
+                        {{ field }}
+                        {% endif %}
+                        {% if field.errors %}
+                        <span class="error-text">{{ field.errors.0 }}</span>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-primary">Create your BookMart account</button>
+
+                    <!-- Terms -->
+                    <p class="terms-text">
+                        By creating an account, you agree to BookMart's 
+                        <a href="#">Conditions of Use</a> and <a href="#">Privacy Notice</a>.
+                    </p>
+                </form>
+
+                <!-- Divider -->
+                <div class="divider">
+                    <span>Already have an account?</span>
                 </div>
-            </form>
+
+                <!-- Sign In Link -->
+                <a href="{% url 'login' %}" class="btn-secondary">Sign in</a>
+            </div>
+
+            <!-- Security Note -->
+            <div class="security-note">
+                <div class="security-icons">
+                    <span class="security-icon">🔒</span>
+                    <span class="security-text">Secure registration • Your information is protected</span>
+                </div>
+            </div>
         </div>
+
+        <!-- Footer -->
+        <footer class="page-footer">
+            <div class="footer-links">
+                <a href="#">Conditions of Use</a>
+                <a href="#">Privacy Notice</a>
+                <a href="#">Help</a>
+            </div>
+            <p class="footer-copyright">© 2024 BookMart. All rights reserved.</p>
+        </footer>
     </div>
 </body>
 </html>

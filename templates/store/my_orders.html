@@ -1,109 +1,122 @@
 {% extends "store/base.html" %}
-{% load static%}
+{% load static %}
+
 {% block extra_css %}
-  <link rel="stylesheet" href="{% static 'css/orders/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/orders/style.css' %}">
 {% endblock %}
+
 {% block title %}My Orders{% endblock %}
 
 {% block content %}
-<div class="reading-journey">
+<div class="orders-page">
     <!-- Page Header -->
-    <div class="journey-header">
-        <h1 class="journey-title">📋 Your Reading Journey</h1>
-        <p class="journey-subtitle">Track your literary adventures and upcoming deliveries</p>
+    <div class="page-header">
+        <h1 class="page-title">Your Orders</h1>
+        <p class="page-subtitle">View and track all your orders</p>
     </div>
 
     {% if orders %}
-    <!-- Orders Timeline -->
-    <div class="orders-timeline">
+    <!-- Orders List -->
+    <div class="orders-container">
         {% for order in orders %}
-        <div class="order-story">
+        <div class="order-card">
             <!-- Order Header -->
-            <div class="story-header">
-                <div class="story-meta">
-                    <h3 class="story-title">Adventure #{{ order.id }}</h3>
-                    <p class="story-date">{{ order.created_at|date:"F j, Y · g:i A" }}</p>
+            <div class="order-header">
+                <div class="order-info">
+                    <div class="order-meta">
+                        <span class="order-label">ORDER PLACED</span>
+                        <span class="order-value">{{ order.created_at|date:"d M Y" }}</span>
+                    </div>
+                    <div class="order-meta">
+                        <span class="order-label">TOTAL</span>
+                        <span class="order-value">₹{{ order.total|floatformat:2 }}</span>
+                    </div>
+                    <div class="order-meta">
+                        <span class="order-label">SHIP TO</span>
+                        <span class="order-value">{{ order.full_name }}</span>
+                    </div>
                 </div>
-                <div class="story-status">
-                    <div class="status-badge status-{{ order.status|lower }}">
-                        <span class="status-icon">
-                            {% if order.status == "Pending" %}⏳
-                            {% elif order.status == "Shipped" %}🚚
-                            {% elif order.status == "Delivered" %}✅
-                            {% elif order.status == "Cancelled" %}❌
-                            {% else %}📦{% endif %}
-                        </span>
-                        <span class="status-text">{{ order.status }}</span>
-                    </div>
-                    <div class="payment-badge">
-                        <span class="payment-icon">💳</span>
-                        {{ order.payment_method }}
-                    </div>
+                <div class="order-id">
+                    <span class="order-label">ORDER ID: #{{ order.id }}</span>
                 </div>
             </div>
 
-            <!-- Order Content -->
-            <div class="story-content">
-                <!-- Delivery Information -->
-                <div class="delivery-card">
-                    <div class="card-header">
-                        <span class="card-icon">🏠</span>
-                        <h4>Delivery Destination</h4>
+            <!-- Order Status Bar -->
+            <div class="order-status-bar">
+                <div class="status-badge status-{{ order.status|lower }}">
+                    <span class="status-icon">
+                        {% if order.status == "Pending" %}⏳
+                        {% elif order.status == "Shipped" %}🚚
+                        {% elif order.status == "Delivered" %}✅
+                        {% elif order.status == "Cancelled" %}❌
+                        {% else %}📦{% endif %}
+                    </span>
+                    <span class="status-text">{{ order.status }}</span>
+                </div>
+                <div class="payment-method">
+                    <span class="payment-icon">💳</span>
+                    <span>{{ order.payment_method }}</span>
+                </div>
+            </div>
+
+            <!-- Order Items -->
+            <div class="order-items">
+                {% for item in order.items.all %}
+                <div class="order-item">
+                    <div class="item-image">
+                        {% if item.book.image %}
+                        <img src="{{ item.book.image.url }}" alt="{{ item.book.title }}">
+                        {% else %}
+                        <div class="item-placeholder">📚</div>
+                        {% endif %}
                     </div>
-                    <div class="card-body">
-                        <div class="address-details">
-                            <p class="recipient">{{ order.full_name }}</p>
-                            <p class="address">{{ order.address }}</p>
-                            <p class="city-pincode">{{ order.city }} - {{ order.pincode }}</p>
-                            <p class="phone">📞 {{ order.phone }}</p>
+                    <div class="item-details">
+                        <h4 class="item-title">{{ item.book.title }}</h4>
+                        <p class="item-author">by {{ item.book.author }}</p>
+                        <div class="item-meta">
+                            <span class="item-qty">Qty: {{ item.quantity }}</span>
+                            <span class="item-price">₹{{ item.price|floatformat:2 }}</span>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
+            </div>
 
-                <!-- Order Items -->
-                <div class="books-card">
-                    <div class="card-header">
-                        <span class="card-icon">📚</span>
-                        <h4>Literary Treasures</h4>
-                        <span class="items-count">{{ order.items.all|length }} item{{ order.items.all|length|pluralize }}</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="books-grid">
-                            {% for item in order.items.all %}
-                            <div class="book-journey-item">
-                                <div class="book-cover-small">
-                                    {% if item.book.image %}
-                                    <img src="{{ item.book.image.url }}" alt="{{ item.book.title }}" class="book-image-small">
-                                    {% else %}
-                                    <div class="book-placeholder-small">📖</div>
-                                    {% endif %}
-                                </div>
-                                <div class="book-details-small">
-                                    <h5 class="book-title-small">{{ item.book.title }}</h5>
-                                    <p class="book-quantity">Quantity: {{ item.quantity }}</p>
-                                    <p class="book-price">₹{{ item.price|floatformat:2 }}</p>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
+            <!-- Delivery Address -->
+            <div class="delivery-info">
+                <div class="delivery-header">
+                    <span class="delivery-icon">📍</span>
+                    <h4>Delivery Address</h4>
+                </div>
+                <div class="delivery-address">
+                    <p class="address-name">{{ order.full_name }}</p>
+                    <p class="address-line">{{ order.address }}</p>
+                    <p class="address-city">{{ order.city }}, {{ order.pincode }}</p>
+                    <p class="address-phone">Phone: {{ order.phone }}</p>
+                </div>
+            </div>
+
+            <!-- Order Timeline -->
+            <div class="order-timeline">
+                <div class="timeline-step {% if order.status == 'Pending' or order.status == 'Shipped' or order.status == 'Delivered' %}completed{% endif %}">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-title">Order Placed</span>
+                        <span class="timeline-date">{{ order.created_at|date:"d M Y, g:i A" }}</span>
                     </div>
                 </div>
-
-                <!-- Order Summary -->
-                <div class="summary-card">
-                    <div class="total-display">
-                        <span class="total-label">Journey Total</span>
-                        <span class="total-amount">₹{{ order.total|floatformat:2 }}</span>
+                <div class="timeline-step {% if order.status == 'Shipped' or order.status == 'Delivered' %}completed{% endif %}">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-title">Shipped</span>
+                        <span class="timeline-date">{% if order.status == 'Shipped' or order.status == 'Delivered' %}In Transit{% endif %}</span>
                     </div>
-                    <div class="progress-indicator">
-                        <div class="progress-labels">
-                            <span class="progress-label {% if order.status == 'Pending' %}active{% endif %}">Ordered</span>
-                            <span class="progress-label {% if order.status == 'Shipped' %}active{% endif %}">Shipped</span>
-                            <span class="progress-label {% if order.status == 'Delivered' %}active{% endif %}">Delivered</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill progress-{{ order.status|lower }}"></div>
-                        </div>
+                </div>
+                <div class="timeline-step {% if order.status == 'Delivered' %}completed{% endif %}">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-title">Delivered</span>
+                        <span class="timeline-date">{% if order.status == 'Delivered' %}Completed{% endif %}</span>
                     </div>
                 </div>
             </div>
@@ -113,35 +126,15 @@
 
     {% else %}
     <!-- Empty State -->
-    <div class="empty-journey">
-        <div class="empty-illustration">
-            <div class="floating-book">📖</div>
-            <div class="floating-book">✨</div>
-            <div class="floating-book">🔍</div>
-        </div>
-        <h2 class="empty-title">Your Adventure Awaits</h2>
-        <p class="empty-message">Your reading journey hasn't begun yet. Start exploring our collection to fill this space with wonderful stories.</p>
-        <a href="{% url 'book_list' %}" class="begin-journey-btn">
-            <span class="journey-icon">🌟</span>
-            <span>Begin Your Literary Adventure</span>
-            <span class="journey-arrow">→</span>
+    <div class="empty-orders">
+        <div class="empty-icon">📦</div>
+        <h2 class="empty-title">No Orders Yet</h2>
+        <p class="empty-message">You haven't placed any orders. Start shopping to see your orders here.</p>
+        <a href="{% url 'book_list' %}" class="shop-now-btn">
+            <span>Start Shopping</span>
+            <span class="shop-arrow">→</span>
         </a>
     </div>
     {% endif %}
-
-    <!-- Reading Inspiration -->
-    {% if orders %}
-    <div class="reading-inspiration">
-        <div class="inspiration-content">
-            <h3>Continue Your Reading Journey</h3>
-            <p>Every book you own is a new adventure waiting to be explored</p>
-            <a href="{% url 'book_list' %}" class="discover-more-btn">
-                <span>Discover More Stories</span>
-                <span class="discover-arrow">→</span>
-            </a>
-        </div>
-    </div>
-    {% endif %}
 </div>
-
 {% endblock %}
