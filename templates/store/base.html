@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BookMart - Your Digital Library</title>
+    <title>BookMart - Your Trusted Online Bookstore</title>
     {% block extra_css %}{% endblock %}
-
-
-
+    
     <style>
         * {
             margin: 0;
@@ -16,183 +14,586 @@
         }
 
         body {
-            font-family: 'Georgia', 'Garamond', serif;
-            background: linear-gradient(to bottom, #fef3c7 0%, #fff7ed 100%);
-            color: #1f2937;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #0F1111;
+            line-height: 1.6;
         }
 
-        /* Navbar */
-        nav {
-            background: linear-gradient(135deg, #78350f 0%, #b45309 100%);
-            padding: 12px 20px;
-            box-shadow: 0 2px 8px rgba(120, 53, 15, 0.15);
-            border-bottom: 2px solid #fcd34d;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        /* Top Header Bar */
+        .top-header {
+            background: #131921;
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
         }
 
-        .navbar-container {
-            max-width: 1400px;
+        .top-header-content {
+            max-width: 1500px;
             margin: 0 auto;
+            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 30px;
+        }
+
+        .delivery-location {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.2s;
+        }
+
+        .delivery-location:hover {
+            border: 1px solid white;
+        }
+
+        .location-icon {
+            font-size: 18px;
+        }
+
+        .location-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.3;
+        }
+
+        .location-label {
+            font-size: 12px;
+            color: #ccc;
+        }
+
+        .location-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Main Navbar */
+        .main-navbar {
+            background: #232F3E;
+            padding: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-container {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
         .navbar-brand {
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: white;
+            background: transparent;
+            padding: 8px 10px;
+            border-radius: 3px;
             text-decoration: none;
-            font-size: 20px;
-            font-weight: bold;
-            flex-shrink: 0;
+            transition: all 0.2s;
+            border: 1px solid transparent;
         }
 
         .navbar-brand:hover {
-            opacity: 0.9;
+            border: 1px solid white;
         }
 
-        .navbar-items {
+        .brand-logo {
+            font-size: 24px;
+            margin-right: 5px;
+        }
+
+        .brand-name {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-tagline {
+            color: white;
+            font-size: 11px;
+            display: block;
+            margin-top: -3px;
+        }
+
+        /* Search Bar */
+        .search-container {
+            flex: 1;
+            max-width: 800px;
+        }
+
+        .search-form {
             display: flex;
-            gap: 15px;
-            align-items: center;
-            list-style: none;
-            flex-wrap: wrap;
-            justify-content: flex-end;
+            height: 40px;
         }
 
-        .nav-link {
+        .search-input {
+            flex: 1;
+            border: none;
+            padding: 0 15px;
+            font-size: 15px;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+
+        .search-input:focus {
+            box-shadow: 0 0 0 3px #FF9900;
+        }
+
+        .search-button {
+            background: #FEBD69;
+            border: none;
+            padding: 0 25px;
+            cursor: pointer;
+            border-radius: 0 4px 4px 0;
+            font-size: 18px;
+            transition: all 0.2s;
+        }
+
+        .search-button:hover {
+            background: #FF9900;
+        }
+
+        /* Nav Right Items */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            padding: 8px 10px;
+            border-radius: 3px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+            min-height: 50px;
+            justify-content: center;
+        }
+
+        .nav-item:hover {
+            border: 1px solid white;
+        }
+
+        .nav-item-label {
+            font-size: 12px;
+            color: #ccc;
+            line-height: 1;
+        }
+
+        .nav-item-text {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-top: 2px;
+        }
+
+        .cart-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+        }
+
+        .cart-icon {
+            font-size: 28px;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #FF9900;
+            color: #131921;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 2px 7px;
+            border-radius: 10px;
+            min-width: 22px;
+            text-align: center;
+        }
+
+        .cart-text {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Secondary Nav */
+        .secondary-nav {
+            background: #232F3E;
+            border-top: 1px solid #3a4553;
+        }
+
+        .secondary-nav-content {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 8px 20px;
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .secondary-nav-link {
             color: white;
             text-decoration: none;
             font-size: 14px;
-            padding: 6px 12px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            padding: 5px 8px;
+            border-radius: 3px;
+            transition: all 0.2s;
+            border: 1px solid transparent;
             white-space: nowrap;
         }
 
-        .nav-link:hover {
-            background: rgba(255, 255, 255, 0.2);
+        .secondary-nav-link:hover {
+            border: 1px solid white;
         }
 
-        .user-greeting {
+        /* Main Content */
+        .main-content {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            min-height: calc(100vh - 200px);
+        }
+
+        /* Footer */
+        .footer {
+            background: #232F3E;
             color: white;
+            padding: 40px 20px 20px;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            max-width: 1500px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #DDD;
+            text-decoration: none;
             font-size: 14px;
+            line-height: 2;
+            transition: all 0.2s;
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #3a4553;
+            color: #DDD;
+            font-size: 14px;
+        }
+
+        /* Trust Badges */
+        .trust-bar {
+            background: white;
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+
+        .trust-content {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .trust-item {
             display: flex;
             align-items: center;
-            gap: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 6px 12px;
-            border-radius: 4px;
+            gap: 10px;
+            color: #0F1111;
+            font-size: 14px;
         }
 
+        .trust-icon {
+            font-size: 24px;
+            color: #067D62;
+        }
+
+        /* User Avatar */
         .user-avatar {
-            width: 22px;
-            height: 22px;
-            background: #fcd34d;
+            width: 32px;
+            height: 32px;
+            background: #FF9900;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            color: #78350f;
-            font-size: 12px;
+            color: #131921;
+            font-size: 14px;
+            margin-right: 5px;
         }
 
-        /* Main Content */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .search-container {
+                max-width: 500px;
+            }
+            
+            .secondary-nav-content {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .navbar-container {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .search-container {
+                order: 3;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .top-header-content {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .nav-item-label {
+                display: none;
+            }
+
+            .trust-content {
+                flex-direction: column;
                 gap: 15px;
             }
 
-            .navbar-items {
-                gap: 8px;
-            }
-
-            .nav-link,
-            .user-greeting {
-                font-size: 12px;
-                padding: 5px 8px;
-            }
-
-            .navbar-brand {
-                font-size: 16px;
-                gap: 6px;
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
         }
 
         @media (max-width: 480px) {
-            nav {
-                padding: 10px 15px;
+            .navbar-brand {
+                padding: 5px 8px;
             }
 
-            .navbar-container {
-                gap: 10px;
+            .brand-name {
+                font-size: 18px;
             }
 
-            .navbar-items {
+            .nav-right {
                 gap: 5px;
             }
 
-            .nav-link,
-            .user-greeting {
-                font-size: 11px;
-                padding: 4px 6px;
+            .nav-item {
+                padding: 5px 8px;
+                min-height: auto;
             }
 
-            .navbar-brand {
-                font-size: 14px;
+            .cart-icon {
+                font-size: 24px;
+            }
+
+            .main-content {
+                padding: 15px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav>
+    <!-- Top Header -->
+    <div class="top-header">
+        <div class="top-header-content">
+            <div class="delivery-location">
+                <span class="location-icon">📍</span>
+                <div class="location-text">
+                    <span class="location-label">Deliver to</span>
+                    <span class="location-name">India</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="main-navbar">
         <div class="navbar-container">
             <a href="{% url 'home' %}" class="navbar-brand">
-                <span>📚</span>
-                <span>BookMart</span>
+                <span class="brand-logo">📚</span>
+                <div>
+                    <div class="brand-name">BookMart</div>
+                    <span class="brand-tagline">.in</span>
+                </div>
             </a>
-            
-            <ul class="navbar-items">
-                <li><a href="{% url 'book_list' %}" class="nav-link">📖 Books</a></li>
 
+            <!-- Search Bar -->
+            <div class="search-container">
+                <form class="search-form" action="{% url 'book_list' %}" method="GET">
+                    <input type="text" name="search" class="search-input" placeholder="Search for books, authors, ISBN...">
+                    <button type="submit" class="search-button">🔍</button>
+                </form>
+            </div>
+
+            <!-- Right Side Nav Items -->
+            <div class="nav-right">
                 {% if user.is_authenticated %}
-                    <li>
-                        <div class="user-greeting">
-                            <div class="user-avatar">{{ user.username|first|upper }}</div>
-                            <span>Hi, {{ user.username }}</span>
+                    <a href="#" class="nav-item">
+                        <span class="nav-item-label">Hello,</span>
+                        <span class="nav-item-text">{{ user.username }}</span>
+                    </a>
+                    
+                    <a href="{% url 'my_orders' %}" class="nav-item">
+                        <span class="nav-item-label">Returns</span>
+                        <span class="nav-item-text">& Orders</span>
+                    </a>
+
+                    <a href="{% url 'view_cart' %}" class="cart-item nav-item">
+                        <div class="cart-icon">
+                            🛒
+                            <span class="cart-count">0</span>
                         </div>
-                    </li>
-                    <li><a href="{% url 'view_cart' %}" class="nav-link">🛒 Cart</a></li>
-                    <li><a href="{% url 'my_orders' %}" class="nav-link">📦 Orders</a></li>
-                    <li><a href="{% url 'logout' %}" class="nav-link">🚪 Logout</a></li>
+                        <span class="cart-text">Cart</span>
+                    </a>
                 {% else %}
-                    <li><a href="{% url 'login' %}" class="nav-link">🔐 Login</a></li>
-                    <li><a href="{% url 'register' %}" class="nav-link">✍️ Register</a></li>
+                    <a href="{% url 'login' %}" class="nav-item">
+                        <span class="nav-item-label">Hello, sign in</span>
+                        <span class="nav-item-text">Account & Lists</span>
+                    </a>
+                    
+                    <a href="{% url 'register' %}" class="nav-item">
+                        <span class="nav-item-text">Register</span>
+                    </a>
+
+                    <a href="{% url 'view_cart' %}" class="cart-item nav-item">
+                        <div class="cart-icon">
+                            🛒
+                            <span class="cart-count">0</span>
+                        </div>
+                        <span class="cart-text">Cart</span>
+                    </a>
                 {% endif %}
-            </ul>
+            </div>
+        </div>
+
+        <!-- Secondary Navigation -->
+        <div class="secondary-nav">
+            <div class="secondary-nav-content">
+                <a href="{% url 'book_list' %}" class="secondary-nav-link">📖 All Books</a>
+                <a href="{% url 'book_list' %}?category=fiction" class="secondary-nav-link">Fiction</a>
+                <a href="{% url 'book_list' %}?category=non-fiction" class="secondary-nav-link">Non-Fiction</a>
+                <a href="{% url 'book_list' %}?sort=bestseller" class="secondary-nav-link">Best Sellers</a>
+                <a href="{% url 'book_list' %}?sort=new" class="secondary-nav-link">New Releases</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="secondary-nav-link">Sign Out</a>
+                {% endif %}
+            </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <div class="container">
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="trust-content">
+            <div class="trust-item">
+                <span class="trust-icon">✓</span>
+                <span>Secure Payment</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">🚚</span>
+                <span>Free Shipping on ₹499+</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">↩️</span>
+                <span>Easy Returns</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">⭐</span>
+                <span>100% Authentic Books</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
         {% block content %}{% endblock %}
     </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Get to Know Us</h4>
+                <ul>
+                    <li><a href="#">About BookMart</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press Releases</a></li>
+                    <li><a href="#">BookMart Science</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Connect with Us</h4>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Make Money with Us</h4>
+                <ul>
+                    <li><a href="#">Sell on BookMart</a></li>
+                    <li><a href="#">Become an Affiliate</a></li>
+                    <li><a href="#">Advertise Your Products</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Let Us Help You</h4>
+                <ul>
+                    <li><a href="#">Your Account</a></li>
+                    <li><a href="#">Returns Centre</a></li>
+                    <li><a href="#">100% Purchase Protection</a></li>
+                    <li><a href="#">Help</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 BookMart.in - Your Trusted Online Bookstore | All Rights Reserved</p>
+        </div>
+    </footer>
 </body>
 </html>
