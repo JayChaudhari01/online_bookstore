@@ -471,13 +471,13 @@
                         <span class="nav-item-text">Register</span>
                     </a>
 
-                    <a href="{% url 'view_cart' %}" class="cart-item nav-item">
-                        <div class="cart-icon">
-                            🛒
-                            <span class="cart-count">0</span>
-                        </div>
-                        <span class="cart-text">Cart</span>
-                    </a>
+                  <a href="{% url 'view_cart' %}" class="cart-item nav-item">
+                         <div class="cart-icon">
+                                   🛒
+                         <span class="cart-count">{{ cart_count }}</span>
+                         </div>
+                         <span class="cart-text">Cart</span>
+                  </a>
                 {% endif %}
             </div>
         </div>

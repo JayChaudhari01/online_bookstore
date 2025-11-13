@@ -42,10 +42,17 @@ def book_list(request):
         books = books.order_by('-id')  # ya tumhara bestseller logic
     elif sort_by == "new":
         books = books.order_by('-id')  # ya '-id' for latest
-
+    
+     # Cart count calculation
+    if request.user.is_authenticated:
+        cart_count = CartItem.objects.filter(user=request.user).count()
+    else:
+        cart_count = 0
+        
     return render(request, "store/book_list.html", {
         "books": books,
-        "categories": categories
+        "categories": categories,
+        "cart_count": cart_count 
     })
 
 
