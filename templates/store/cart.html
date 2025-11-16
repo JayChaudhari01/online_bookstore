@@ -4,128 +4,101 @@
   <link rel="stylesheet" href="{% static 'css/cart/style.css' %}">
 {% endblock %}
 {% block content %}
-<div class="reading-cart-container">
-    <!-- Cart Header -->
-    <div class="cart-header">
-        <h1 class="cart-title">📚 Your Reading Cart</h1>
-        <p class="cart-subtitle">Your literary treasures await</p>
+<div class="shopping-cart-container">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="{% url 'book_list' %}" class="breadcrumb-link">Books</a>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-current">Shopping Cart</span>
     </div>
 
     {% if cart_items %}
-    <!-- Cart Items -->
-    <div class="cart-items-section">
-        <div class="cart-items">
+    <!-- Main Cart Layout -->
+    <div class="cart-layout">
+        <!-- Left: Cart Items -->
+        <div class="cart-items-container">
+            <div class="cart-header-section">
+                <h1 class="cart-main-title">Shopping Cart</h1>
+                <span class="items-count">{{ cart_items|length }} item{{ cart_items|length|pluralize }}</span>
+            </div>
+
             {% for item in cart_items %}
-            <div class="cart-item-card">
-                <!-- Book Visual -->
-                <div class="book-visual">
+            <div class="cart-item">
+                <!-- Product Image -->
+                <div class="item-image">
                     {% if item.book.image %}
-                    <img src="{{ item.book.image.url }}" alt="{{ item.book.title }}" class="book-cart-image">
+                        <img src="{{ item.book.image.url }}" alt="{{ item.book.title }}" class="product-img">
                     {% else %}
-                    <div class="book-cart-placeholder">
-                        <span class="placeholder-cart-icon">📖</span>
-                    </div>
+                        <div class="product-img-placeholder">
+                            <span class="img-placeholder-icon">📚</span>
+                        </div>
                     {% endif %}
                 </div>
 
-                <!-- Book Details -->
-                <div class="book-cart-details">
-                    <h3 class="book-cart-title">{{ item.book.title }}</h3>
-                    <p class="book-cart-author">by {{ item.book.author }}</p>
-                    <div class="price-display">
-                        <span class="unit-price">₹{{ item.book.price }}</span>
-                        <span class="price-each">each</span>
+                <!-- Product Info -->
+                <div class="item-info">
+                    <a href="{% url 'book_detail' item.book.pk %}" class="item-title">{{ item.book.title }}</a>
+                    <p class="item-author">by {{ item.book.author }}</p>
+                    <p class="item-stock">In Stock</p>
+                    
+                    <!-- Quantity & Remove -->
+                    <div class="item-actions">
+                        <form method="post" action="{% url 'update_cart' item.id %}" class="qty-form">
+                            {% csrf_token %}
+                            <label for="qty-{{ item.id }}" class="qty-label">Qty:</label>
+                            <select name="quantity" id="qty-{{ item.id }}" class="qty-select" onchange="this.form.submit()">
+                                {% for i in "12345678910"|make_list %}
+                                    <option value="{{ i }}" {% if item.quantity == i|add:0 %}selected{% endif %}>{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </form>
+                        
+                        <span class="action-separator">|</span>
+                        
+                        <a href="{% url 'delete_from_cart' item.id %}" class="action-link">Delete</a>
                     </div>
                 </div>
 
-                <!-- Quantity Controls -->
-                <div class="quantity-section">
-                    <form method="post" action="{% url 'update_cart' item.id %}" class="quantity-form">
-                        {% csrf_token %}
-                        <div class="quantity-controls">
-                            <label class="quantity-label">Quantity:</label>
-                            <div class="quantity-input-group">
-                                <input type="number" name="quantity" value="{{ item.quantity }}" min="1" 
-                                       class="quantity-input">
-                                <button type="submit" class="update-btn">
-                                    <span class="update-icon">🔄</span>
-                                    Update
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Item Total -->
-                <div class="item-total">
-                    <span class="total-label">Item Total</span>
-                    <span class="total-price">₹{{ item.total_price }}</span>
-                </div>
-
-                <!-- Remove Action -->
-                <div class="remove-action">
-                    <a href="{% url 'delete_from_cart' item.id %}" class="remove-btn">
-                        <span class="remove-icon">🗑️</span>
-                        Remove
-                    </a>
+                <!-- Product Price -->
+                <div class="item-price">
+                    <span class="price">₹{{ item.book.price }}</span>
                 </div>
             </div>
             {% endfor %}
+
+            <!-- Subtotal -->
+            <div class="cart-subtotal">
+                <span class="subtotal-text">Subtotal ({{ cart_items|length }} item{{ cart_items|length|pluralize }}):</span>
+                <span class="subtotal-price">₹{{ total_price }}</span>
+            </div>
         </div>
 
-        <!-- Cart Summary -->
-        <div class="cart-summary">
-            <div class="summary-card">
-                <h3 class="summary-title">Order Summary</h3>
-                
-                <div class="summary-details">
-                    <div class="summary-item">
-                        <span class="summary-label">Items Total</span>
-                        <span class="summary-value">₹{{ total_price }}</span>
-                    </div>
-                    
-                    <div class="summary-item">
-                        <span class="summary-label">Shipping</span>
-                        <span class="summary-value free-shipping">FREE</span>
-                    </div>
-                    
-                    <div class="summary-divider"></div>
-                    
-                    <div class="summary-total">
-                        <span class="total-label">Total Amount</span>
-                        <span class="total-amount">₹{{ total_price }}</span>
-                    </div>
+        <!-- Right: Order Summary -->
+        <div class="order-summary-container">
+            <div class="order-summary-card">
+                <div class="summary-subtotal">
+                    <span class="summary-subtotal-text">Subtotal ({{ cart_items|length }} item{{ cart_items|length|pluralize }}):</span>
+                    <span class="summary-subtotal-price">₹{{ total_price }}</span>
                 </div>
 
-                <!-- Checkout Action -->
-                <a href="{% url 'checkout' %}" class="checkout-btn">
-                    <span class="checkout-icon">📦</span>
-                    <span>Proceed to Checkout</span>
-                    <span class="checkout-arrow">→</span>
-                </a>
+                <a href="{% url 'checkout' %}" class="btn-proceed-checkout">Proceed to Checkout</a>
+            </div>
 
-                <!-- Continue Shopping -->
-                <a href="{% url 'book_list' %}" class="continue-shopping">
-                    <span class="continue-icon">➕</span>
-                    Continue Adding Books
-                </a>
+            <!-- Delivery Info -->
+            <div class="delivery-notice">
+                <p class="delivery-text">FREE Delivery on orders over ₹500</p>
             </div>
         </div>
     </div>
 
     {% else %}
-    <!-- Empty Cart State -->
-    <div class="empty-cart">
-        <div class="empty-cart-icon">🛒</div>
-        <h2 class="empty-cart-title">Your Cart Feels Light</h2>
-        <p class="empty-cart-message">Fill it with stories waiting to be discovered</p>
-        <a href="{% url 'book_list' %}" class="explore-books-btn">
-            <span>Explore Our Library</span>
-            <span class="explore-arrow">→</span>
-        </a>
+    <!-- Empty Cart -->
+    <div class="empty-cart-state">
+        <div class="empty-cart-content">
+            <h2 class="empty-title">Your cart is empty</h2>
+            <a href="{% url 'book_list' %}" class="btn-shop-now">Shop now</a>
+        </div>
     </div>
     {% endif %}
 </div>
-
-
 {% endblock %}
