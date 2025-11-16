@@ -7,10 +7,15 @@
 {% block content %}
 <div class="book-collection">
 
-    <!-- Page Header -->
+    {% comment %} <!-- Page Header -->
     <div class="collection-header">
         <h1 class="collection-title">📚 Our Collection</h1>
         <p class="collection-subtitle">Discover stories that spark your imagination</p>
+    </div> {% endcomment %}
+     <div class="breadcrumb">
+        <a href="{% url 'home' %}" class="breadcrumb-link">Home</a>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-current">{{ book.title }}</span>
     </div>
 
     <!-- Search Result Heading -->

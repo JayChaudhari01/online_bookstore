@@ -5,119 +5,93 @@
 <link rel="stylesheet" href="{% static 'css/orders/style.css' %}">
 {% endblock %}
 
-{% block title %}My Orders{% endblock %}
+{% block title %}Your Orders{% endblock %}
 
 {% block content %}
-<div class="orders-page">
-    <!-- Page Header -->
-    <div class="page-header">
-        <h1 class="page-title">Your Orders</h1>
-        <p class="page-subtitle">View and track all your orders</p>
+<div class="orders-container">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="{% url 'book_list' %}" class="breadcrumb-link">Home</a>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-current">Your Orders</span>
     </div>
+
+    <!-- Page Header -->
+    <h1 class="orders-heading">Your Orders</h1>
 
     {% if orders %}
     <!-- Orders List -->
-    <div class="orders-container">
+    <div class="orders-list">
         {% for order in orders %}
         <div class="order-card">
             <!-- Order Header -->
             <div class="order-header">
-                <div class="order-info">
-                    <div class="order-meta">
-                        <span class="order-label">ORDER PLACED</span>
-                        <span class="order-value">{{ order.created_at|date:"d M Y" }}</span>
+                <div class="order-header-left">
+                    <div class="header-item">
+                        <span class="header-label">ORDER PLACED</span>
+                        <span class="header-value">{{ order.created_at|date:"d M Y" }}</span>
                     </div>
-                    <div class="order-meta">
-                        <span class="order-label">TOTAL</span>
-                        <span class="order-value">₹{{ order.total|floatformat:2 }}</span>
+                    <div class="header-item">
+                        <span class="header-label">TOTAL</span>
+                        <span class="header-value">₹{{ order.total|floatformat:2 }}</span>
                     </div>
-                    <div class="order-meta">
-                        <span class="order-label">SHIP TO</span>
-                        <span class="order-value">{{ order.full_name }}</span>
+                    <div class="header-item">
+                        <span class="header-label">SHIP TO</span>
+                        <span class="header-value">{{ order.full_name|truncatewords:2 }}</span>
                     </div>
                 </div>
-                <div class="order-id">
-                    <span class="order-label">ORDER ID: #{{ order.id }}</span>
+                <div class="order-header-right">
+                    <span class="order-number">ORDER # {{ order.id }}</span>
                 </div>
             </div>
 
-            <!-- Order Status Bar -->
-            <div class="order-status-bar">
-                <div class="status-badge status-{{ order.status|lower }}">
-                    <span class="status-icon">
-                        {% if order.status == "Pending" %}⏳
-                        {% elif order.status == "Shipped" %}🚚
-                        {% elif order.status == "Delivered" %}✅
-                        {% elif order.status == "Cancelled" %}❌
-                        {% else %}📦{% endif %}
-                    </span>
-                    <span class="status-text">{{ order.status }}</span>
+            <!-- Order Body -->
+            <div class="order-body">
+                <!-- Status -->
+                <div class="order-status">
+                    <span class="status-badge status-{{ order.status|lower }}">{{ order.status }}</span>
                 </div>
-                <div class="payment-method">
-                    <span class="payment-icon">💳</span>
-                    <span>{{ order.payment_method }}</span>
-                </div>
-            </div>
 
-            <!-- Order Items -->
-            <div class="order-items">
+                <!-- Order Items -->
                 {% for item in order.items.all %}
                 <div class="order-item">
-                    <div class="item-image">
+                    <div class="item-image-wrapper">
                         {% if item.book.image %}
-                        <img src="{{ item.book.image.url }}" alt="{{ item.book.title }}">
+                            <img src="{{ item.book.image.url }}" alt="{{ item.book.title }}" class="item-image">
                         {% else %}
-                        <div class="item-placeholder">📚</div>
+                            <div class="item-image-placeholder">📚</div>
                         {% endif %}
                     </div>
-                    <div class="item-details">
-                        <h4 class="item-title">{{ item.book.title }}</h4>
+                    <div class="item-info">
+                        <a href="{% url 'book_detail' item.book.pk %}" class="item-title">{{ item.book.title }}</a>
                         <p class="item-author">by {{ item.book.author }}</p>
-                        <div class="item-meta">
+                        <div class="item-pricing">
                             <span class="item-qty">Qty: {{ item.quantity }}</span>
                             <span class="item-price">₹{{ item.price|floatformat:2 }}</span>
                         </div>
+                        <p class="item-return-info">Return window closed</p>
+                    </div>
+                    <div class="item-actions">
+                        <a href="{% url 'book_detail' item.book.pk %}" class="btn-buy-again">Buy it again</a>
                     </div>
                 </div>
                 {% endfor %}
-            </div>
 
-            <!-- Delivery Address -->
-            <div class="delivery-info">
-                <div class="delivery-header">
-                    <span class="delivery-icon">📍</span>
-                    <h4>Delivery Address</h4>
+                <!-- Delivery Address -->
+                <div class="delivery-section">
+                    <h4 class="delivery-heading">Delivery Address</h4>
+                    <div class="delivery-address">
+                        <p class="address-name">{{ order.full_name }}</p>
+                        <p class="address-text">{{ order.address }}</p>
+                        <p class="address-text">{{ order.city }}, {{ order.pincode }}</p>
+                        <p class="address-phone">{{ order.phone }}</p>
+                    </div>
                 </div>
-                <div class="delivery-address">
-                    <p class="address-name">{{ order.full_name }}</p>
-                    <p class="address-line">{{ order.address }}</p>
-                    <p class="address-city">{{ order.city }}, {{ order.pincode }}</p>
-                    <p class="address-phone">Phone: {{ order.phone }}</p>
-                </div>
-            </div>
 
-            <!-- Order Timeline -->
-            <div class="order-timeline">
-                <div class="timeline-step {% if order.status == 'Pending' or order.status == 'Shipped' or order.status == 'Delivered' %}completed{% endif %}">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-title">Order Placed</span>
-                        <span class="timeline-date">{{ order.created_at|date:"d M Y, g:i A" }}</span>
-                    </div>
-                </div>
-                <div class="timeline-step {% if order.status == 'Shipped' or order.status == 'Delivered' %}completed{% endif %}">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-title">Shipped</span>
-                        <span class="timeline-date">{% if order.status == 'Shipped' or order.status == 'Delivered' %}In Transit{% endif %}</span>
-                    </div>
-                </div>
-                <div class="timeline-step {% if order.status == 'Delivered' %}completed{% endif %}">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <span class="timeline-title">Delivered</span>
-                        <span class="timeline-date">{% if order.status == 'Delivered' %}Completed{% endif %}</span>
-                    </div>
+                <!-- Payment Method -->
+                <div class="payment-section">
+                    <h4 class="payment-heading">Payment Method</h4>
+                    <p class="payment-info">{{ order.payment_method }}</p>
                 </div>
             </div>
         </div>
@@ -126,14 +100,12 @@
 
     {% else %}
     <!-- Empty State -->
-    <div class="empty-orders">
-        <div class="empty-icon">📦</div>
-        <h2 class="empty-title">No Orders Yet</h2>
-        <p class="empty-message">You haven't placed any orders. Start shopping to see your orders here.</p>
-        <a href="{% url 'book_list' %}" class="shop-now-btn">
-            <span>Start Shopping</span>
-            <span class="shop-arrow">→</span>
-        </a>
+    <div class="empty-orders-state">
+        <div class="empty-content">
+            <h2 class="empty-title">No orders yet</h2>
+            <p class="empty-text">Looks like you haven't placed any orders.</p>
+            <a href="{% url 'book_list' %}" class="btn-start-shopping">Start shopping</a>
+        </div>
     </div>
     {% endif %}
 </div>

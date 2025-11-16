@@ -4,201 +4,190 @@
   <link rel="stylesheet" href="{% static 'css/checkout/style.css' %}">
 {% endblock %}
 {% block content %}
-<div class="checkout-journey">
-    <!-- Checkout Header -->
-    <div class="checkout-header">
-        <h1 class="checkout-title">📦 Finalize Your Reading Journey</h1>
-        <p class="checkout-subtitle">One step away from your new books</p>
+<div class="checkout-container">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="{% url 'book_list' %}" class="breadcrumb-link">Books</a>
+        <span class="breadcrumb-separator">›</span>
+        <a href="{% url 'view_cart' %}" class="breadcrumb-link">Cart</a>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-current">Checkout</span>
     </div>
 
     {% if cart_items %}
     <div class="checkout-layout">
-        <!-- Delivery & Payment Section -->
-        <div class="checkout-form-section">
-            <!-- Delivery Information -->
-            <div class="form-card">
-                <div class="form-card-header">
-                    <span class="form-icon">🏠</span>
-                    <h2 class="form-title">Delivery Details</h2>
-                </div>
+        <!-- Left: Form Section -->
+        <div class="checkout-main">
+            <h1 class="checkout-heading">Checkout</h1>
+
+            <form method="post" action="{% url 'checkout' %}" class="checkout-form" id="checkout-form">
+                {% csrf_token %}
                 
-                <form method="post" action="{% url 'checkout' %}" class="delivery-form">
-                    {% csrf_token %}
-                    
-                    <div class="form-grid">
-                        <div class="form-group full-width">
-                            <label for="full_name" class="form-label">
-                                <span class="label-icon">👤</span>
-                                Full Name
-                            </label>
-                            <input type="text" name="full_name" id="full_name" class="form-input" 
-                                   placeholder="Enter your full name" required>
-                        </div>
-
-                        <div class="form-group full-width">
-                            <label for="address" class="form-label">
-                                <span class="label-icon">📍</span>
-                                Delivery Address
-                            </label>
-                            <textarea name="address" id="address" class="form-textarea" 
-                                      rows="3" placeholder="Where should we deliver your books?" required></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="city" class="form-label">
-                                <span class="label-icon">🏙️</span>
-                                City
-                            </label>
-                            <input type="text" name="city" id="city" class="form-input" 
-                                   placeholder="Your city" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="pincode" class="form-label">
-                                <span class="label-icon">📮</span>
-                                Pincode
-                            </label>
-                            <input type="text" name="pincode" id="pincode" class="form-input" 
-                                   placeholder="6-digit code" required>
-                        </div>
-
-                        <div class="form-group full-width">
-                            <label for="phone" class="form-label">
-                                <span class="label-icon">📞</span>
-                                Contact Number
-                            </label>
-                            <input type="text" name="phone" id="phone" class="form-input" 
-                                   placeholder="For delivery updates" required>
-                        </div>
-                    </div>
-            </div>
-
-            <!-- Payment Method -->
-            <div class="form-card">
-                <div class="form-card-header">
-                    <span class="form-icon">💳</span>
-                    <h2 class="form-title">Payment Method</h2>
-                </div>
-                
-                <div class="payment-options">
-                    <div class="payment-option">
-                        <input type="radio" name="payment_method" id="cod" value="COD" class="payment-radio" checked>
-                        <label for="cod" class="payment-label">
-                            <span class="payment-icon">💰</span>
-                            <span class="payment-info">
-                                <span class="payment-name">Cash on Delivery</span>
-                                <span class="payment-desc">Pay when your books arrive</span>
-                            </span>
-                        </label>
+                <!-- Delivery Address -->
+                <div class="checkout-section">
+                    <div class="section-header">
+                        <span class="section-number">1</span>
+                        <h2 class="section-title">Delivery address</h2>
                     </div>
 
-                    <div class="payment-option">
-                        <input type="radio" name="payment_method" id="upi" value="UPI" class="payment-radio">
-                        <label for="upi" class="payment-label">
-                            <span class="payment-icon">📱</span>
-                            <span class="payment-info">
-                                <span class="payment-name">UPI / Netbanking</span>
-                                <span class="payment-desc">Instant digital payment</span>
-                            </span>
-                        </label>
-                    </div>
-
-                    <div class="payment-option">
-                        <input type="radio" name="payment_method" id="card" value="Card" class="payment-radio">
-                        <label for="card" class="payment-label">
-                            <span class="payment-icon">💳</span>
-                            <span class="payment-info">
-                                <span class="payment-name">Credit / Debit Card</span>
-                                <span class="payment-desc">Secure card payment</span>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Submit Button -->
-                <button type="submit" class="place-order-btn">
-                    <span class="order-icon">✨</span>
-                    <span>Place Your Order</span>
-                    <span class="order-arrow">→</span>
-                </button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Order Summary -->
-        <div class="order-summary-section">
-            <div class="summary-card">
-                <div class="summary-header">
-                    <h3 class="summary-title">📚 Order Summary</h3>
-                    <p class="summary-subtitle">{{ cart_items|length }} item{{ cart_items|length|pluralize }} in your order</p>
-                </div>
-
-                <div class="order-items">
-                    {% for item in cart_items %}
-                    <div class="order-item">
-                        <div class="item-visual">
-                            {% if item.book.image %}
-                            <img src="{{ item.book.image.url }}" alt="{{ item.book.title }}" class="item-image">
-                            {% else %}
-                            <div class="item-placeholder">📖</div>
-                            {% endif %}
+                    <div class="form-content">
+                        <div class="form-row">
+                            <div class="form-group full">
+                                <label for="full_name" class="field-label">Full name</label>
+                                <input type="text" name="full_name" id="full_name" 
+                                       class="field-input" required>
+                            </div>
                         </div>
-                        
-                        <div class="item-details">
-                            <h4 class="item-title">{{ item.book.title }}</h4>
-                            <p class="item-author">by {{ item.book.author }}</p>
-                            <div class="item-meta">
-                                <span class="item-quantity">Qty: {{ item.quantity }}</span>
-                                <span class="item-price">₹{{ item.book.price }}</span>
+
+                        <div class="form-row">
+                            <div class="form-group full">
+                                <label for="phone" class="field-label">Mobile number</label>
+                                <input type="tel" name="phone" id="phone" 
+                                       class="field-input" placeholder="10-digit mobile number" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group half">
+                                <label for="pincode" class="field-label">Pincode</label>
+                                <input type="text" name="pincode" id="pincode" 
+                                       class="field-input" placeholder="6 digits [0-9] PIN code" 
+                                       maxlength="6" required>
+                            </div>
+
+                            <div class="form-group half">
+                                <label for="city" class="field-label">Town/City</label>
+                                <input type="text" name="city" id="city" 
+                                       class="field-input" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group full">
+                                <label for="address" class="field-label">Address</label>
+                                <textarea name="address" id="address" 
+                                          class="field-textarea" rows="3" 
+                                          placeholder="Flat, House no., Building, Company, Apartment" 
+                                          required></textarea>
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
                 </div>
 
-                <div class="order-totals">
-                    <div class="total-line">
-                        <span class="total-label">Items Total</span>
-                        <span class="total-value">₹{{ total|floatformat:2 }}</span>
+                <!-- Payment Method -->
+                <div class="checkout-section">
+                    <div class="section-header">
+                        <span class="section-number">2</span>
+                        <h2 class="section-title">Payment method</h2>
                     </div>
-                    
-                    <div class="total-line">
-                        <span class="total-label">Delivery</span>
-                        <span class="total-value free-delivery">FREE</span>
-                    </div>
-                    
-                    <div class="total-divider"></div>
-                    
-                    <div class="grand-total">
-                        <span class="grand-label">Total Amount</span>
-                        <span class="grand-value">₹{{ total|floatformat:2 }}</span>
+
+                    <div class="form-content">
+                        <div class="payment-methods">
+                            <label class="payment-option">
+                                <input type="radio" name="payment_method" value="COD" 
+                                       class="payment-radio" checked>
+                                <span class="payment-text">Cash on Delivery/Pay on Delivery</span>
+                            </label>
+
+                            <label class="payment-option">
+                                <input type="radio" name="payment_method" value="UPI" 
+                                       class="payment-radio">
+                                <span class="payment-text">UPI</span>
+                            </label>
+
+                            <label class="payment-option">
+                                <input type="radio" name="payment_method" value="Card" 
+                                       class="payment-radio">
+                                <span class="payment-text">Credit or Debit Card</span>
+                            </label>
+
+                            <label class="payment-option">
+                                <input type="radio" name="payment_method" value="NetBanking" 
+                                       class="payment-radio">
+                                <span class="payment-text">Net Banking</span>
+                            </label>
+                        </div>
                     </div>
                 </div>
 
-                <div class="delivery-note">
-                    <div class="note-icon">🚚</div>
-                    <div class="note-content">
-                        <strong>Fast Delivery</strong>
-                        <p>Your books will arrive in 3-5 business days</p>
+                <!-- Review Items -->
+                <div class="checkout-section">
+                    <div class="section-header">
+                        <span class="section-number">3</span>
+                        <h2 class="section-title">Review items and delivery</h2>
                     </div>
+
+                    <div class="form-content">
+                        <div class="items-review">
+                            {% for item in cart_items %}
+                            <div class="review-item">
+                                <div class="review-image">
+                                    {% if item.book.image %}
+                                        <img src="{{ item.book.image.url }}" alt="{{ item.book.title }}">
+                                    {% else %}
+                                        <div class="review-placeholder">📚</div>
+                                    {% endif %}
+                                </div>
+                                <div class="review-details">
+                                    <p class="review-title">{{ item.book.title }}</p>
+                                    <p class="review-author">by {{ item.book.author }}</p>
+                                    <p class="review-price">₹{{ item.book.price }}</p>
+                                    <p class="review-qty">Qty: {{ item.quantity }}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Place Order Button -->
+                <div class="place-order-section">
+                    <button type="submit" class="btn-place-order">Place your order</button>
+                    <p class="order-terms">By placing your order, you agree to our terms and conditions.</p>
+                </div>
+            </form>
+        </div>
+
+        <!-- Right: Order Summary -->
+        <div class="checkout-sidebar">
+            <div class="summary-box">
+                <button type="submit" form="checkout-form" class="btn-place-order-top">Place your order</button>
+                
+                <p class="summary-notice">By placing your order, you agree to our terms and conditions.</p>
+
+                <hr class="summary-divider">
+
+                <h3 class="summary-heading">Order Summary</h3>
+
+                <div class="summary-line">
+                    <span>Items ({{ cart_items|length }}):</span>
+                    <span>₹{{ total|floatformat:2 }}</span>
+                </div>
+
+                <div class="summary-line">
+                    <span>Delivery:</span>
+                    <span class="free-text">FREE</span>
+                </div>
+
+                <hr class="summary-divider">
+
+                <div class="summary-total">
+                    <span class="total-label">Order Total:</span>
+                    <span class="total-amount">₹{{ total|floatformat:2 }}</span>
                 </div>
             </div>
         </div>
     </div>
 
     {% else %}
-    <!-- Empty Cart State -->
-    <div class="empty-checkout">
-        <div class="empty-icon">📭</div>
-        <h2 class="empty-title">Your Reading Cart is Empty</h2>
-        <p class="empty-message">Add some books to begin your literary adventure</p>
-        <a href="{% url 'book_list' %}" class="browse-books-btn">
-            <span>Explore Our Collection</span>
-            <span class="browse-arrow">→</span>
-        </a>
+    <!-- Empty Cart -->
+    <div class="empty-checkout-state">
+        <div class="empty-content">
+            <h2 class="empty-heading">Your cart is empty</h2>
+            <p class="empty-text">Add items to your cart before checking out.</p>
+            <a href="{% url 'book_list' %}" class="btn-continue">Continue Shopping</a>
+        </div>
     </div>
     {% endif %}
 </div>
-
-
 {% endblock %}

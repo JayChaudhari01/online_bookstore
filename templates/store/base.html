@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BookMart - Your Trusted Online Bookstore</title>
+    <title>{% block title %}BookMart{% endblock %}</title>
     {% block extra_css %}{% endblock %}
     
     <style>
@@ -15,17 +15,18 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background-color: #f5f5f5;
+            background-color: #EAEDED;
             color: #0F1111;
             line-height: 1.6;
         }
 
-        /* Top Header Bar */
+        /* ===========================
+           TOP HEADER BAR
+        =========================== */
         .top-header {
-            background: #131921;
+            background: #131A22;
             color: white;
-            padding: 8px 0;
-            font-size: 14px;
+            padding: 0;
         }
 
         .top-header-content {
@@ -33,106 +34,91 @@
             margin: 0 auto;
             padding: 0 20px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            align-items: stretch;
+            height: 70px;
         }
 
-        .delivery-location {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            cursor: pointer;
-            padding: 5px 10px;
-            border-radius: 3px;
-            transition: all 0.2s;
-        }
-
-        .delivery-location:hover {
-            border: 1px solid white;
-        }
-
-        .location-icon {
-            font-size: 18px;
-        }
-
-        .location-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.3;
-        }
-
-        .location-label {
-            font-size: 12px;
-            color: #ccc;
-        }
-
-        .location-name {
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        /* Main Navbar */
-        .main-navbar {
-            background: #232F3E;
-            padding: 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .navbar-container {
-            max-width: 1500px;
-            margin: 0 auto;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
+        /* Logo */
         .navbar-brand {
             display: flex;
             align-items: center;
-            background: transparent;
-            padding: 8px 10px;
-            border-radius: 3px;
+            padding: 10px 12px;
             text-decoration: none;
-            transition: all 0.2s;
             border: 1px solid transparent;
+            transition: border-color 0.15s;
         }
 
         .navbar-brand:hover {
             border: 1px solid white;
         }
 
-        .brand-logo {
-            font-size: 24px;
-            margin-right: 5px;
-        }
-
         .brand-name {
             color: white;
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 700;
             letter-spacing: -0.5px;
         }
 
-        .brand-tagline {
+        .brand-domain {
             color: white;
             font-size: 11px;
-            display: block;
-            margin-top: -3px;
+            vertical-align: super;
+        }
+
+        /* Delivery Location */
+        .delivery-location {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 10px 12px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: border-color 0.15s;
+        }
+
+        .delivery-location:hover {
+            border: 1px solid white;
+        }
+
+        .location-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .location-label {
+            font-size: 12px;
+            color: #CCCCCC;
+        }
+
+        .location-name {
+            font-size: 14px;
+            font-weight: 700;
         }
 
         /* Search Bar */
         .search-container {
             flex: 1;
-            max-width: 800px;
+            max-width: 900px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
         }
 
         .search-form {
+            width: 100%;
             display: flex;
             height: 40px;
+        }
+
+        .search-select {
+            background: #F3F3F3;
+            border: none;
+            padding: 0 10px;
+            font-size: 12px;
+            border-radius: 4px 0 0 4px;
+            cursor: pointer;
+            color: #555;
         }
 
         .search-input {
@@ -140,47 +126,43 @@
             border: none;
             padding: 0 15px;
             font-size: 15px;
-            border-radius: 4px 0 0 4px;
             outline: none;
         }
 
         .search-input:focus {
-            box-shadow: 0 0 0 3px #FF9900;
+            outline: 3px solid #FF9900;
+            outline-offset: -3px;
         }
 
         .search-button {
             background: #FEBD69;
             border: none;
-            padding: 0 25px;
+            padding: 0 12px;
             cursor: pointer;
             border-radius: 0 4px 4px 0;
-            font-size: 18px;
-            transition: all 0.2s;
+            transition: background 0.15s;
+            width: 45px;
         }
 
         .search-button:hover {
-            background: #FF9900;
+            background: #F3A847;
         }
 
-        /* Nav Right Items */
+        /* Right Nav Items */
         .nav-right {
             display: flex;
-            align-items: center;
-            gap: 15px;
+            align-items: stretch;
         }
 
         .nav-item {
             color: white;
             text-decoration: none;
-            padding: 8px 10px;
-            border-radius: 3px;
+            padding: 10px 12px;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            transition: all 0.2s;
-            border: 1px solid transparent;
-            min-height: 50px;
             justify-content: center;
+            border: 1px solid transparent;
+            transition: border-color 0.15s;
         }
 
         .nav-item:hover {
@@ -189,50 +171,57 @@
 
         .nav-item-label {
             font-size: 12px;
-            color: #ccc;
+            color: #CCCCCC;
             line-height: 1;
         }
 
         .nav-item-text {
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
             line-height: 1.2;
             margin-top: 2px;
         }
 
+        /* Cart */
         .cart-item {
             position: relative;
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 12px;
+            padding: 10px 12px;
         }
 
-        .cart-icon {
-            font-size: 28px;
+        .cart-icon-wrapper {
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+        }
+
+        .cart-svg {
+            width: 38px;
+            height: 32px;
         }
 
         .cart-count {
             position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #FF9900;
-            color: #131921;
-            font-size: 14px;
-            font-weight: bold;
-            padding: 2px 7px;
-            border-radius: 10px;
-            min-width: 22px;
-            text-align: center;
+            top: 0;
+            left: 16px;
+            color: #FF9900;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 1;
         }
 
         .cart-text {
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
         }
 
-        /* Secondary Nav */
+        /* ===========================
+           SECONDARY NAV
+        =========================== */
         .secondary-nav {
             background: #232F3E;
             border-top: 1px solid #3a4553;
@@ -241,20 +230,35 @@
         .secondary-nav-content {
             max-width: 1500px;
             margin: 0 auto;
-            padding: 8px 20px;
+            padding: 0 20px;
             display: flex;
-            gap: 25px;
             align-items: center;
+            height: 45px;
+            gap: 20px;
+        }
+
+        .nav-menu-btn {
+            background: transparent;
+            color: white;
+            border: 1px solid transparent;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: border-color 0.15s;
+        }
+
+        .nav-menu-btn:hover {
+            border: 1px solid white;
         }
 
         .secondary-nav-link {
             color: white;
             text-decoration: none;
             font-size: 14px;
-            padding: 5px 8px;
-            border-radius: 3px;
-            transition: all 0.2s;
+            padding: 8px 12px;
             border: 1px solid transparent;
+            transition: border-color 0.15s;
             white-space: nowrap;
         }
 
@@ -262,36 +266,53 @@
             border: 1px solid white;
         }
 
-        /* Main Content */
+        /* ===========================
+           MAIN CONTENT
+        =========================== */
         .main-content {
-            max-width: 1500px;
-            margin: 0 auto;
-            padding: 20px;
-            background: white;
-            min-height: calc(100vh - 200px);
+            min-height: calc(100vh - 300px);
         }
 
-        /* Footer */
+        /* ===========================
+           FOOTER
+        =========================== */
         .footer {
             background: #232F3E;
             color: white;
-            padding: 40px 20px 20px;
-            margin-top: 40px;
+            margin-top: 50px;
+        }
+
+        .back-to-top {
+            background: #37475A;
+            text-align: center;
+            padding: 15px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .back-to-top:hover {
+            background: #485769;
+        }
+
+        .back-to-top-text {
+            color: white;
+            font-size: 13px;
+            font-weight: 500;
         }
 
         .footer-content {
             max-width: 1500px;
             margin: 0 auto;
+            padding: 40px 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
         }
 
         .footer-section h4 {
             font-size: 16px;
             margin-bottom: 15px;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .footer-section ul {
@@ -302,8 +323,7 @@
             color: #DDD;
             text-decoration: none;
             font-size: 14px;
-            line-height: 2;
-            transition: all 0.2s;
+            line-height: 2.2;
         }
 
         .footer-section a:hover {
@@ -311,99 +331,87 @@
         }
 
         .footer-bottom {
+            background: #131A22;
             text-align: center;
-            padding-top: 20px;
+            padding: 30px 20px;
             border-top: 1px solid #3a4553;
+        }
+
+        .footer-bottom-text {
             color: #DDD;
-            font-size: 14px;
+            font-size: 12px;
         }
 
-     
-
-        /* User Avatar */
-        .user-avatar {
-            width: 32px;
-            height: 32px;
-            background: #FF9900;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #131921;
-            font-size: 14px;
-            margin-right: 5px;
-        }
-
-        /* Responsive Design */
+        /* ===========================
+           RESPONSIVE
+        =========================== */
         @media (max-width: 1024px) {
             .search-container {
-                max-width: 500px;
+                max-width: 600px;
             }
-            
-            .secondary-nav-content {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
             }
         }
 
         @media (max-width: 768px) {
-            .navbar-container {
+            .top-header-content {
                 flex-wrap: wrap;
-                gap: 10px;
+                height: auto;
+            }
+
+            .navbar-brand {
+                order: 1;
+            }
+
+            .delivery-location {
+                order: 2;
+                flex: 1;
             }
 
             .search-container {
-                order: 3;
+                order: 4;
                 width: 100%;
                 max-width: 100%;
+                padding: 10px 0;
             }
 
-            .top-header-content {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
+            .nav-right {
+                order: 3;
             }
 
             .nav-item-label {
                 display: none;
             }
 
-            .trust-content {
-                flex-direction: column;
-                gap: 15px;
+            .secondary-nav-content {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
             }
 
             .footer-content {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 25px;
             }
         }
 
         @media (max-width: 480px) {
-            .navbar-brand {
-                padding: 5px 8px;
-            }
-
             .brand-name {
-                font-size: 18px;
+                font-size: 20px;
             }
 
-            .nav-right {
-                gap: 5px;
+            .search-select {
+                display: none;
             }
 
             .nav-item {
-                padding: 5px 8px;
-                min-height: auto;
+                padding: 10px 8px;
             }
 
-            .cart-icon {
-                font-size: 24px;
-            }
-
-            .main-content {
-                padding: 15px;
+            .cart-text {
+                display: none;
             }
         }
     </style>
@@ -412,91 +420,89 @@
     <!-- Top Header -->
     <div class="top-header">
         <div class="top-header-content">
+            <!-- Logo -->
+            <a href="{% url 'home' %}" class="navbar-brand">
+                <span class="brand-name">BookMart<span class="brand-domain"></span></span>
+            </a>
+
+            <!-- Delivery Location -->
             <div class="delivery-location">
-                <span class="location-icon">📍</span>
                 <div class="location-text">
                     <span class="location-label">Deliver to</span>
                     <span class="location-name">India</span>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Main Navigation -->
-    <nav class="main-navbar">
-        <div class="navbar-container">
-            <a href="{% url 'home' %}" class="navbar-brand">
-                <span class="brand-logo">📚</span>
-                <div>
-                    <div class="brand-name">BookMart</div>
-                    <span class="brand-tagline">.in</span>
-                </div>
-            </a>
 
             <!-- Search Bar -->
             <div class="search-container">
                 <form class="search-form" action="{% url 'book_list' %}" method="GET">
-                    <input type="text" name="search" class="search-input" placeholder="Search for books, authors, ISBN...">
-                    <button type="submit" class="search-button">🔍</button>
+                    <select class="search-select">
+                        <option>All</option>
+                        <option>Books</option>
+                        <option>Fiction</option>
+                        <option>Non-Fiction</option>
+                    </select>
+                    <input type="text" name="search" class="search-input" placeholder="Search BookMart.in">
+                    <button type="submit" class="search-button">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
                 </form>
             </div>
 
-            <!-- Right Side Nav Items -->
+            <!-- Right Nav Items -->
             <div class="nav-right">
                 {% if user.is_authenticated %}
-                    <a href="#" class="nav-item">
-                        <span class="nav-item-label">Hello,</span>
-                        <span class="nav-item-text">{{ user.username }}</span>
+                    <a href="{% url 'my_orders' %}" class="nav-item">
+                        <span class="nav-item-label">Hello, {{ user.username }}</span>
+                        <span class="nav-item-text">Account & Lists</span>
                     </a>
                     
                     <a href="{% url 'my_orders' %}" class="nav-item">
                         <span class="nav-item-label">Returns</span>
                         <span class="nav-item-text">& Orders</span>
                     </a>
-
-                    <a href="{% url 'view_cart' %}" class="cart-item nav-item">
-                        <div class="cart-icon">
-                            🛒
-                            <span class="cart-count">0</span>
-                        </div>
-                        <span class="cart-text">Cart</span>
-                    </a>
                 {% else %}
                     <a href="{% url 'login' %}" class="nav-item">
                         <span class="nav-item-label">Hello, sign in</span>
                         <span class="nav-item-text">Account & Lists</span>
                     </a>
-                    
-                    <a href="{% url 'register' %}" class="nav-item">
-                        <span class="nav-item-text">Register</span>
-                    </a>
-
-                  <a href="{% url 'view_cart' %}" class="cart-item nav-item">
-                         <div class="cart-icon">
-                                   🛒
-                         <span class="cart-count">{{ cart_count }}</span>
-                         </div>
-                         <span class="cart-text">Cart</span>
-                  </a>
                 {% endif %}
+
+                <a href="{% url 'view_cart' %}" class="cart-item nav-item">
+                    <div class="cart-icon-wrapper">
+                        <svg class="cart-svg" viewBox="0 0 40 32" fill="none">
+                            <path d="M8 8h27l-3 12H11L8 8z" stroke="white" stroke-width="2.5" fill="none"/>
+                            <circle cx="13" cy="27" r="2" fill="white"/>
+                            <circle cx="29" cy="27" r="2" fill="white"/>
+                            <path d="M1 1h5l2 7" stroke="white" stroke-width="2.5" fill="none"/>
+                        </svg>
+                        <span class="cart-count">{{ cart_count|default:"0" }}</span>
+                    </div>
+                    <span class="cart-text">Cart</span>
+                </a>
             </div>
         </div>
+    </div>
 
-        <!-- Secondary Navigation -->
-        <div class="secondary-nav">
-            <div class="secondary-nav-content">
-                <a href="{% url 'book_list' %}" class="secondary-nav-link">📖 All Books</a>
-                <a href="{% url 'book_list' %}?category=fiction" class="secondary-nav-link">Fiction</a>
-                <a href="{% url 'book_list' %}?category=non-fiction" class="secondary-nav-link">Non-Fiction</a>
-                <a href="{% url 'book_list' %}?sort=bestseller" class="secondary-nav-link">Best Sellers</a>
-                <a href="{% url 'book_list' %}?sort=new" class="secondary-nav-link">New Releases</a>
-                {% if user.is_authenticated %}
-                    <a href="{% url 'logout' %}" class="secondary-nav-link">Sign Out</a>
-                {% endif %}
-            </div>
+    <!-- Secondary Navigation -->
+    <div class="secondary-nav">
+        <div class="secondary-nav-content">
+            <button class="nav-menu-btn">All</button>
+            <a href="{% url 'book_list' %}" class="secondary-nav-link">Best Sellers</a>
+            <a href="{% url 'book_list' %}?category=fiction" class="secondary-nav-link">Fiction</a>
+            <a href="{% url 'book_list' %}?category=non-fiction" class="secondary-nav-link">Non-Fiction</a>
+            <a href="{% url 'book_list' %}?sort=new" class="secondary-nav-link">New Releases</a>
+            <a href="#" class="secondary-nav-link">Today's Deals</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="secondary-nav-link">Sign Out</a>
+            {% else %}
+                <a href="{% url 'register' %}" class="secondary-nav-link">Register</a>
+            {% endif %}
         </div>
-    </nav>
-
+    </div>
 
     <!-- Main Content Area -->
     <div class="main-content">
@@ -505,22 +511,18 @@
 
     <!-- Footer -->
     <footer class="footer">
+        <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <span class="back-to-top-text">Back to top</span>
+        </div>
+        
         <div class="footer-content">
             <div class="footer-section">
                 <h4>Get to Know Us</h4>
                 <ul>
-                    <li><a href="#">About BookMart</a></li>
+                    <li><a href="#">About Us</a></li>
                     <li><a href="#">Careers</a></li>
                     <li><a href="#">Press Releases</a></li>
-                    <li><a href="#">BookMart Science</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Connect with Us</h4>
-                <ul>
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">BookMart Cares</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -529,20 +531,32 @@
                     <li><a href="#">Sell on BookMart</a></li>
                     <li><a href="#">Become an Affiliate</a></li>
                     <li><a href="#">Advertise Your Products</a></li>
+                    <li><a href="#">Self-Publish with Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Payment Products</h4>
+                <ul>
+                    <li><a href="#">BookMart Business Card</a></li>
+                    <li><a href="#">Shop with Points</a></li>
+                    <li><a href="#">Reload Your Balance</a></li>
+                    <li><a href="#">Currency Converter</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h4>Let Us Help You</h4>
                 <ul>
                     <li><a href="#">Your Account</a></li>
-                    <li><a href="#">Returns Centre</a></li>
-                    <li><a href="#">100% Purchase Protection</a></li>
+                    <li><a href="#">Your Orders</a></li>
+                    <li><a href="#">Shipping Rates & Policies</a></li>
+                    <li><a href="#">Returns & Replacements</a></li>
                     <li><a href="#">Help</a></li>
                 </ul>
             </div>
         </div>
+        
         <div class="footer-bottom">
-            <p>&copy; 2024 BookMart.in - Your Trusted Online Bookstore | All Rights Reserved</p>
+            <p class="footer-bottom-text">© 2024 BookMart.in</p>
         </div>
     </footer>
 </body>
