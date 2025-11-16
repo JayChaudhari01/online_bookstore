@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from store.models import Book  ,Category,CartItem,Order,OrderItem
 from django.contrib import messages
 from .forms import BookForm , SignupForm
+from django.db.models import Q
+
 
 
 
@@ -16,6 +18,8 @@ def home(request):
 def book_list(request):
     books = Book.objects.all()
     categories = Category.objects.all()
+    query = request.GET.get('search', '')  # get search text
+
 
     # Category filtering by NAME (not ID)
     category_name = request.GET.get("category")
@@ -49,11 +53,24 @@ def book_list(request):
     else:
         cart_count = 0
         
+    if query:
+        books = books.filter(
+            Q(title__icontains=query) |
+            Q(author__icontains=query) |
+            Q(isbn__icontains=query)
+        )
+
+    context = {
+        'books': books,
+        'query': query,
+    }    
+        
     return render(request, "store/book_list.html", {
         "books": books,
         "categories": categories,
-        "cart_count": cart_count 
-    })
+        "cart_count": cart_count,
+        
+    },context)
 
 
 def book_detail(request, pk):
