@@ -4,97 +4,99 @@
   <link rel="stylesheet" href="{% static 'css/book_detail/style.css' %}">
 {% endblock %}
 {% block content %}
-<div class="book-journey">
-    <!-- Book Header -->
-    <div class="book-header">
-        <a href="{% url 'book_list' %}" class="back-link">
-            <span class="back-arrow">←</span>
-            Back to Library
-        </a>
-        <h1 class="book-main-title">{{ book.title }}</h1>
-        <p class="book-subtitle">A literary journey awaits</p>
+<div class="book-detail-container">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="{% url 'book_list' %}" class="breadcrumb-link">Books</a>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-current">{{ book.title }}</span>
     </div>
 
-    <!-- Book Showcase -->
-    <div class="book-showcase">
-        <!-- Book Visual -->
-        <div class="book-visual">
+    <!-- Main Product Section -->
+    <div class="product-section">
+        <!-- Left: Image -->
+        <div class="product-image-section">
             {% if book.image %}
-            <div class="book-cover-large">
-                <img src="{{ book.image.url }}" alt="{{ book.title }}" class="book-image-large">
-                <div class="cover-glow"></div>
-            </div>
+                <img src="{{ book.image.url }}" alt="{{ book.title }}" class="product-image">
             {% else %}
-            <div class="book-cover-placeholder">
-                <span class="placeholder-icon-large">📚</span>
-                <span class="placeholder-text-large">Cover Art</span>
-            </div>
+                <div class="product-image-placeholder">
+                    <span class="placeholder-icon">📚</span>
+                </div>
             {% endif %}
         </div>
 
-        <!-- Book Details -->
-        <div class="book-details">
-            <div class="detail-card">
-                <h2 class="detail-title">About This Book</h2>
-                
-                <div class="detail-item">
-                    <span class="detail-label">✍️ Author</span>
+        <!-- Right: Details -->
+        <div class="product-info-section">
+            <h1 class="product-title">{{ book.title }}</h1>
+            <p class="product-author">by {{ book.author }}</p>
+            
+            <!-- Rating Placeholder -->
+            <div class="product-rating">
+                <span class="stars">⭐⭐⭐⭐⭐</span>
+                <span class="rating-text">4.5 out of 5 stars</span>
+                <span class="rating-count">(1,234 ratings)</span>
+            </div>
+
+            <hr class="divider">
+
+            <!-- Price -->
+            <div class="price-section">
+                <span class="price-label">Price:</span>
+                <span class="price-value">₹{{ book.price }}</span>
+            </div>
+
+            <!-- Stock Status -->
+            <div class="stock-status">
+                <span class="stock-icon">✓</span>
+                <span class="stock-text">In Stock</span>
+            </div>
+
+            <!-- Product Details Table -->
+            <div class="product-details-table">
+                <div class="detail-row">
+                    <span class="detail-label">ISBN</span>
+                    <span class="detail-value">{{ book.isbn }}</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Author</span>
                     <span class="detail-value">{{ book.author }}</span>
                 </div>
-
-                <div class="detail-item">
-                    <span class="detail-label">💰 Price</span>
-                    <span class="detail-value price-tag">₹{{ book.price }}</span>
-                </div>
-
-                <div class="detail-item">
-                    <span class="detail-label">🔖 ISBN</span>
-                    <span class="detail-value isbn-code">{{ book.isbn }}</span>
-                </div>
-
-                <!-- Action Buttons -->
-                 <div class="action-buttons">
-                 {% if user.is_authenticated %}
-             <a href="{% url 'add_to_cart' book.id %}" class="add-cart-btn">
-             <span class="cart-icon">🛒</span>
-             <span>Add to Reading Cart</span>
-             </a>
-    {% else %}
-    <a href="{% url 'login' %}?next={% url 'add_to_cart' book.id %}" class="add-cart-btn">
-        <span class="cart-icon">🔒</span>
-        <span>Add to Reading Cart</span>
-    </a>
-    {% endif %}
-                    
-                    <a href="{% url 'book_list' %}" class="browse-more-btn">
-                        <span>Continue Browsing</span>
-                        <span class="browse-arrow">→</span>
-                    </a>
+                <div class="detail-row">
+                    <span class="detail-label">Format</span>
+                    <span class="detail-value">Paperback</span>
                 </div>
             </div>
 
-            <!-- Reading Experience -->
-            <div class="reading-experience">
-                <h3 class="experience-title">📖 Reading Experience</h3>
-                <div class="experience-items">
-                    <div class="experience-item">
-                        <span class="exp-icon">✨</span>
-                        <span>Immerse yourself in this captivating story</span>
+            <hr class="divider">
+
+            <!-- Add to Cart Button -->
+            <div class="cart-section">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'add_to_cart' book.id %}" class="btn-add-to-cart">Add to Cart</a>
+                {% else %}
+                    <a href="{% url 'login' %}?next={% url 'add_to_cart' book.id %}" class="btn-add-to-cart">Add to Cart</a>
+                {% endif %}
+                <a href="{% url 'book_list' %}" class="btn-continue-shopping">Continue Shopping</a>
+            </div>
+
+            <!-- Delivery Info -->
+            <div class="delivery-info">
+                <div class="delivery-item">
+                    <span class="delivery-icon">🚚</span>
+                    <div class="delivery-text">
+                        <strong>Free Delivery</strong>
+                        <span>on orders over ₹500</span>
                     </div>
-                    <div class="experience-item">
-                        <span class="exp-icon">🏷️</span>
-                        <span>Free bookmark included with every purchase</span>
-                    </div>
-                    <div class="experience-item">
-                        <span class="exp-icon">🚚</span>
-                        <span>Fast delivery to your reading nook</span>
+                </div>
+                <div class="delivery-item">
+                    <span class="delivery-icon">↩️</span>
+                    <div class="delivery-text">
+                        <strong>Easy Returns</strong>
+                        <span>30-day return policy</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
 {% endblock %}
-

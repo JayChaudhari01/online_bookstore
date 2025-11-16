@@ -1,406 +1,344 @@
-/* Book Journey Container */
-.book-journey {
+/* ===========================
+   CONTAINER
+=========================== */
+.book-detail-container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 20px;
+    background: #fff;
 }
 
-/* Book Header */
-.book-header {
-    background: linear-gradient(135deg, #232F3E 0%, #374151 100%);
-    color: white;
-    padding: 40px 30px;
-    border-radius: 8px;
-    margin-bottom: 30px;
-}
-
-.back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: white;
-    text-decoration: none;
+/* ===========================
+   BREADCRUMB
+=========================== */
+.breadcrumb {
     font-size: 14px;
     margin-bottom: 20px;
-    padding: 8px 16px;
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 4px;
-    transition: all 0.3s;
+    color: #565959;
 }
 
-.back-link:hover {
-    background: rgba(255,255,255,0.1);
-    border-color: white;
+.breadcrumb-link {
+    color: #007185;
+    text-decoration: none;
 }
 
-.back-arrow {
-    font-size: 18px;
+.breadcrumb-link:hover {
+    color: #C7511F;
+    text-decoration: underline;
 }
 
-.book-main-title {
-    font-size: 36px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    line-height: 1.3;
+.breadcrumb-separator {
+    margin: 0 8px;
+    color: #565959;
 }
 
-.book-subtitle {
-    font-size: 18px;
-    opacity: 0.9;
-    font-weight: 400;
+.breadcrumb-current {
+    color: #0F1111;
 }
 
-/* Book Showcase */
-.book-showcase {
+/* ===========================
+   PRODUCT SECTION
+=========================== */
+.product-section {
     display: grid;
-    grid-template-columns: 450px 1fr;
+    grid-template-columns: 400px 1fr;
     gap: 40px;
-    background: white;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-top: 20px;
 }
 
-/* Book Visual */
-.book-visual {
+/* ===========================
+   IMAGE SECTION
+=========================== */
+.product-image-section {
     position: sticky;
-    top: 120px;
+    top: 20px;
     height: fit-content;
 }
 
-.book-cover-large {
-    position: relative;
+.product-image {
     width: 100%;
-    height: 600px;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
-.book-image-large {
+.product-image-placeholder {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.cover-glow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
-    pointer-events: none;
-}
-
-.book-cover-placeholder {
-    width: 100%;
-    height: 600px;
+    height: 500px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-}
-
-.placeholder-icon-large {
-    font-size: 120px;
-    margin-bottom: 20px;
-}
-
-.placeholder-text-large {
-    font-size: 24px;
-    color: white;
-    font-weight: 500;
-}
-
-/* Book Details */
-.book-details {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
-.detail-card {
-    background: #f7f7f7;
-    padding: 30px;
-    border-radius: 8px;
-    border: 1px solid #e7e7e7;
-}
-
-.detail-title {
-    font-size: 24px;
-    font-weight: 600;
-    color: #0F1111;
-    margin-bottom: 25px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid #FF9900;
-}
-
-.detail-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 0;
-    border-bottom: 1px solid #ddd;
-}
-
-.detail-item:last-of-type {
-    border-bottom: none;
-}
-
-.detail-label {
-    font-size: 16px;
-    font-weight: 600;
-    color: #565959;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.detail-value {
-    font-size: 16px;
-    color: #0F1111;
-    font-weight: 500;
-}
-
-.price-tag {
-    font-size: 28px;
-    font-weight: bold;
-    color: #B12704;
-}
-
-.isbn-code {
-    font-family: 'Courier New', monospace;
-    background: white;
-    padding: 6px 12px;
     border-radius: 4px;
     border: 1px solid #ddd;
 }
 
-/* Action Buttons */
-.action-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 30px;
+.placeholder-icon {
+    font-size: 100px;
 }
 
-.add-cart-btn,
-.browse-more-btn {
+/* ===========================
+   INFO SECTION
+=========================== */
+.product-info-section {
+    padding: 10px 0;
+}
+
+.product-title {
+    font-size: 24px;
+    font-weight: 400;
+    color: #0F1111;
+    line-height: 1.3;
+    margin-bottom: 8px;
+}
+
+.product-author {
+    font-size: 14px;
+    color: #007185;
+    margin-bottom: 12px;
+}
+
+.product-author:hover {
+    color: #C7511F;
+    text-decoration: underline;
+}
+
+/* ===========================
+   RATING
+=========================== */
+.product-rating {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 10px;
-    padding: 16px 24px;
-    border-radius: 8px;
-    text-decoration: none;
+    margin-bottom: 15px;
+}
+
+.stars {
+    color: #FFA41C;
     font-size: 16px;
-    font-weight: 600;
-    transition: all 0.3s;
-    cursor: pointer;
 }
 
-.add-cart-btn {
-    background: #FFD814;
-    color: #0F1111;
-    border: 2px solid #FFD814;
+.rating-text {
+    font-size: 14px;
+    color: #007185;
 }
 
-.add-cart-btn:hover {
-    background: #F7CA00;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 216, 20, 0.4);
+.rating-count {
+    font-size: 14px;
+    color: #007185;
 }
 
-.cart-icon {
-    font-size: 22px;
+/* ===========================
+   DIVIDER
+=========================== */
+.divider {
+    border: none;
+    border-top: 1px solid #e7e7e7;
+    margin: 15px 0;
 }
 
-.browse-more-btn {
-    background: white;
-    color: #0F1111;
-    border: 2px solid #ddd;
+/* ===========================
+   PRICE SECTION
+=========================== */
+.price-section {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
-.browse-more-btn:hover {
-    background: #f7f7f7;
-    border-color: #999;
-    transform: translateY(-2px);
+.price-label {
+    font-size: 14px;
+    color: #565959;
 }
 
-.browse-arrow {
+.price-value {
+    font-size: 28px;
+    font-weight: 400;
+    color: #ee0505;
+}
+
+/* ===========================
+   STOCK STATUS
+=========================== */
+.stock-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #007600;
     font-size: 18px;
-    transition: transform 0.3s;
-}
-
-.browse-more-btn:hover .browse-arrow {
-    transform: translateX(5px);
-}
-
-/* Reading Experience */
-.reading-experience {
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    border: 1px solid #e7e7e7;
-}
-
-.experience-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: #0F1111;
     margin-bottom: 20px;
 }
 
-.experience-items {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+.stock-icon {
+    font-size: 20px;
 }
 
-.experience-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 15px;
-    background: #f7f7f7;
-    border-radius: 6px;
+/* ===========================
+   PRODUCT DETAILS TABLE
+=========================== */
+.product-details-table {
+    margin: 20px 0;
+}
+
+.detail-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    padding: 8px 0;
     font-size: 14px;
+}
+
+.detail-label {
+    color: #565959;
+    font-weight: 600;
+}
+
+.detail-value {
     color: #0F1111;
 }
 
-.exp-icon {
+/* ===========================
+   CART SECTION
+=========================== */
+.cart-section {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.btn-add-to-cart {
+    background: #FFD814;
+    border: 1px solid #FCD200;
+    color: #0F1111;
+    padding: 11px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-add-to-cart:hover {
+    background: #F7CA00;
+    border-color: #F2C200;
+}
+
+.btn-continue-shopping {
+    background: #fff;
+    border: 1px solid #D5D9D9;
+    color: #0F1111;
+    padding: 11px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-continue-shopping:hover {
+    background: #F7F8F8;
+    border-color: #C8C8C8;
+}
+
+/* ===========================
+   DELIVERY INFO
+=========================== */
+.delivery-info {
+    background: #F0F2F2;
+    border: 1px solid #D5D9D9;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 20px;
+}
+
+.delivery-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.delivery-item:last-child {
+    margin-bottom: 0;
+}
+
+.delivery-icon {
     font-size: 24px;
-    flex-shrink: 0;
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .book-showcase {
-        grid-template-columns: 400px 1fr;
-        gap: 30px;
-        padding: 30px;
-    }
-
-    .book-cover-large,
-    .book-cover-placeholder {
-        height: 520px;
-    }
+.delivery-text {
+    display: flex;
+    flex-direction: column;
 }
 
+.delivery-text strong {
+    font-size: 14px;
+    color: #0F1111;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.delivery-text span {
+    font-size: 13px;
+    color: #565959;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
 @media (max-width: 768px) {
-    .book-showcase {
+    .product-section {
         grid-template-columns: 1fr;
-        gap: 25px;
-        padding: 25px 20px;
+        gap: 20px;
     }
 
-    .book-visual {
-        position: static;
+    .product-image-section {
+        position: relative;
+        top: 0;
     }
 
-    .book-cover-large,
-    .book-cover-placeholder {
-        height: 450px;
-        max-width: 400px;
-        margin: 0 auto;
+    .product-image-placeholder {
+        height: 400px;
     }
 
-    .book-header {
-        padding: 30px 20px;
-    }
-
-    .book-main-title {
-        font-size: 28px;
-    }
-
-    .book-subtitle {
-        font-size: 16px;
-    }
-
-    .detail-card,
-    .reading-experience {
-        padding: 25px 20px;
-    }
-
-    .detail-title {
+    .product-title {
         font-size: 20px;
     }
 
-    .detail-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-        padding: 15px 0;
+    .price-value {
+        font-size: 24px;
     }
 
-    .price-tag {
-        font-size: 24px;
+    .cart-section {
+        flex-direction: column;
+    }
+
+    .btn-add-to-cart,
+    .btn-continue-shopping {
+        text-align: center;
+        width: 100%;
     }
 }
 
 @media (max-width: 480px) {
-    .book-header {
-        padding: 25px 15px;
+    .book-detail-container {
+        padding: 15px;
     }
 
-    .book-main-title {
-        font-size: 24px;
+    .product-image-placeholder {
+        height: 300px;
     }
 
-    .book-subtitle {
-        font-size: 14px;
-    }
-
-    .book-showcase {
-        padding: 20px 15px;
-    }
-
-    .book-cover-large,
-    .book-cover-placeholder {
-        height: 350px;
-    }
-
-    .placeholder-icon-large {
-        font-size: 80px;
-    }
-
-    .placeholder-text-large {
+    .product-title {
         font-size: 18px;
     }
 
-    .detail-card,
-    .reading-experience {
-        padding: 20px 15px;
-    }
-
-    .detail-title {
-        font-size: 18px;
-    }
-
-    .detail-label,
-    .detail-value {
-        font-size: 14px;
-    }
-
-    .price-tag {
+    .price-value {
         font-size: 22px;
-    }
-
-    .add-cart-btn,
-    .browse-more-btn {
-        padding: 14px 20px;
-        font-size: 15px;
-    }
-
-    .experience-item {
-        padding: 12px;
-        font-size: 13px;
-    }
-
-    .exp-icon {
-        font-size: 20px;
     }
 }

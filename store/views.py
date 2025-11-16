@@ -55,9 +55,8 @@ def book_list(request):
         
     if query:
         books = books.filter(
-            Q(title__icontains=query) |
-            Q(author__icontains=query) |
-            Q(isbn__icontains=query)
+            Q(title__icontains=query) 
+          
         )
 
     context = {
@@ -69,8 +68,9 @@ def book_list(request):
         "books": books,
         "categories": categories,
         "cart_count": cart_count,
+        'query': query
         
-    },context)
+    })
 
 
 def book_detail(request, pk):
@@ -111,7 +111,7 @@ def user_login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("home")
+                return redirect("view_cart")
     else:
         form = AuthenticationForm()
     return render(request, "store/login.html", {"form": form})

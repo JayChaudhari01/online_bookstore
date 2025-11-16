@@ -1,96 +1,70 @@
 {% extends "store/base.html" %}
-{% load static%}
+{% load static %}
 {% block extra_css %}
-  <link rel="stylesheet" href="{% static 'css/book_list/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/book_list/style.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="library-container">
-    <!-- Library Header -->
-    <div class="library-header">
-        <h1 class="library-title">📖 Our Collection</h1>
-        <p class="library-subtitle">Discover stories that speak to your soul</p>
+<div class="book-collection">
+
+    <!-- Page Header -->
+    <div class="collection-header">
+        <h1 class="collection-title">📚 Our Collection</h1>
+        <p class="collection-subtitle">Discover stories that spark your imagination</p>
     </div>
 
-    <!-- Discovery Tools -->
-    <div class="discovery-section">
-        <form method="get" class="discovery-form">
-            <div class="form-grid">
-                <div class="form-group">
-                    <select name="category" class="discovery-select">
-                        <option value="">📚 All Genres</option>
-                        {% for cat in categories %}
-                        <option value="{{ cat.id }}" {% if request.GET.category == cat.id|stringformat:"s" %}selected{% endif %}>
-                            {{ cat.name }}
-                        </option>
-                        {% endfor %}
-                    </select>
-                </div>
+    <!-- Search Result Heading -->
+    {% if query %}
+        <h3 class="search-heading">Search results for: "{{ query }}"</h3>
+    {% endif %}
 
-                <div class="form-group">
-                    <input type="number" name="min_price" placeholder="💸 Min Price" 
-                           value="{{ request.GET.min_price }}" class="discovery-input">
-                </div>
-
-                <div class="form-group">
-                    <input type="number" name="max_price" placeholder="💰 Max Price" 
-                           value="{{ request.GET.max_price }}" class="discovery-input">
-                </div>
-
-                <div class="form-group">
-                    <button type="submit" class="discover-btn">
-                        <span>Explore</span>
-                        <span class="search-icon">🔍</span>
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <!-- Book Gallery -->
-    <div class="book-gallery">
-        {% if books %}
-        <div class="books-grid">
+    <!-- Books Section -->
+    {% if books %}
+        <div class="collection-grid">
             {% for book in books %}
-            <div class="book-card">
-                <div class="book-cover">
+            <a href="{% url 'book_detail' book.pk %}" class="collection-card">
+
+                <!-- Book Image -->
+                <div class="collection-cover">
                     {% if book.image %}
-                    <img src="{{ book.image.url }}" 
-                         class="book-image" 
-                         alt="{{ book.title }}">
+                        <img src="{{ book.image.url }}" alt="{{ book.title }}" class="collection-image">
                     {% else %}
-                    <div class="book-placeholder">
-                        <span class="placeholder-icon">📚</span>
-                        <span class="placeholder-text">Cover Coming Soon</span>
-                    </div>
+                        <div class="collection-placeholder">
+                            <span class="placeholder-icon">📖</span>
+                        </div>
                     {% endif %}
+                </div>
+
+                <!-- Book Info -->
+                <div class="collection-info">
+                    <h3 class="collection-book-title">{{ book.title }}</h3>
+                    <p class="collection-author">by {{ book.author }}</p>
                     
-                    <div class="book-overlay">
-                        <a href="{% url 'book_detail' book.pk %}" class="preview-btn">
-                            Peek Inside
-                        </a>
+                    <!-- Rating Section -->
+                    <div class="collection-rating">
+                        <span class="collection-stars">⭐⭐⭐⭐⭐</span>
+                        <span class="collection-rating-count">(2,345)</span>
+                    </div>
+                    
+                    <!-- Price Section -->
+                    <div class="collection-price-wrapper">
+                        <span class="collection-price">₹{{ book.price }}</span>
+                        <span class="collection-original-price">₹{% widthratio book.price 1 2 %}</span>
+                        <span class="collection-discount-badge">50% OFF</span>
                     </div>
                 </div>
 
-                <div class="book-info">
-                    <h3 class="book-title">{{ book.title }}</h3>
-                    <p class="book-author">✍️ {{ book.author }}</p>
-                    <div class="book-meta">
-                        <span class="book-price">₹{{ book.price }}</span>
-                        <span class="book-status">Available</span>
-                    </div>
-                </div>
-            </div>
+            </a>
             {% endfor %}
         </div>
-        {% else %}
-        <div class="empty-library">
-            <div class="empty-icon">📖</div>
-            <h3>No Books Found</h3>
-            <p>Try adjusting your search criteria or explore different genres</p>
-        </div>
-        {% endif %}
-    </div>
-</div>
 
+    {% else %}
+        <!-- Empty State -->
+        <div class="empty-section">
+            <div class="empty-icon">📚</div>
+            <h3 class="empty-title">No Books Found</h3>
+            <p class="empty-text">Try changing your search or filter.</p>
+        </div>
+    {% endif %}
+</div>
 {% endblock %}
