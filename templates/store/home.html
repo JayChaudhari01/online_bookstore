@@ -1,247 +1,195 @@
 {% extends 'store/base.html' %}
-{% load static%}
+{% load static %}
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/home/style.css' %}">
 {% endblock %}
 
-
 {% block content %}
+<!-- Welcome Popup Modal -->
+<div id="welcomeModal" class="welcome-modal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <div class="modal-body">
+            <h2 class="modal-title">Welcome to BookMart</h2>
+            <p class="modal-text">Get up to 70% off on selected books</p>
+            <p class="modal-offer">Use code: <strong>WELCOME70</strong></p>
+            <a href="{% url 'book_list' %}" class="modal-btn">Shop Now</a>
+        </div>
+    </div>
+</div>
+
+<!-- Hero Slider -->
 <div class="hero-slider">
-    <div class="slider-container">
-        <div class="slide active" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-            <div class="slide-content">
-                <h2>📚 Mega Book Sale!</h2>
-                <p>Up to 70% OFF on Best Sellers</p>
-                <a href="{% url 'book_list' %}" class="slide-btn">Shop Now</a>
+    <div class="slider-wrapper">
+        <div class="slide active">
+            <div class="slide-image" style="background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=1200') center/cover;">
+                <div class="slide-overlay">
+                    <h2 class="slide-title">Best Sellers of 2025</h2>
+                    <p class="slide-subtitle">Discover trending books everyone's reading</p>
+                    <a href="{% url 'book_list' %}" class="slide-btn">Shop now</a>
+                </div>
             </div>
         </div>
-        <div class="slide" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-            <div class="slide-content">
-                <h2>✨ New Arrivals</h2>
-                <p>Discover the Latest Books of 2024</p>
-                <a href="{% url 'book_list' %}?sort=new" class="slide-btn">Explore Now</a>
+        <div class="slide">
+            <div class="slide-image" style="background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1200') center/cover;">
+                <div class="slide-overlay">
+                    <h2 class="slide-title">New Arrivals</h2>
+                    <p class="slide-subtitle">Fresh releases added daily</p>
+                    <a href="{% url 'book_list' %}?sort=new" class="slide-btn">Explore</a>
+                </div>
             </div>
         </div>
-        <div class="slide" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-            <div class="slide-content">
-                <h2>🎁 Free Shipping</h2>
-                <p>On Orders Above ₹499</p>
-                <a href="{% url 'book_list' %}" class="slide-btn">Start Shopping</a>
+        <div class="slide">
+            <div class="slide-image" style="background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1200') center/cover;">
+                <div class="slide-overlay">
+                    <h2 class="slide-title">Up to 50% Off</h2>
+                    <p class="slide-subtitle">Limited time deals on bestsellers</p>
+                    <a href="{% url 'book_list' %}" class="slide-btn">View deals</a>
+                </div>
             </div>
         </div>
     </div>
-    <div class="slider-nav">
-        <div class="slider-dot active" onclick="changeSlide(0)"></div>
-        <div class="slider-dot" onclick="changeSlide(1)"></div>
-        <div class="slider-dot" onclick="changeSlide(2)"></div>
+    <button class="slider-arrow prev" onclick="changeSlide(-1)">‹</button>
+    <button class="slider-arrow next" onclick="changeSlide(1)">›</button>
+    <div class="slider-dots">
+        <span class="dot active" onclick="goToSlide(0)"></span>
+        <span class="dot" onclick="goToSlide(1)"></span>
+        <span class="dot" onclick="goToSlide(2)"></span>
     </div>
 </div>
 
 <!-- Categories Section -->
-<h2 class="section-title">Shop by Category</h2>
-<div class="categories-grid">
-    <a href="{% url 'book_list' %}?category=fiction" class="category-card">
-        <div class="category-image">📖</div>
-        <div class="category-content">
-            <h3 class="category-title">Fiction Books</h3>
-            <p class="category-description">Explore captivating stories and novels</p>
-            <span class="category-link">Browse collection →</span>
-        </div>
-    </a>
-
-    <a href="{% url 'book_list' %}?category=non-fiction" class="category-card">
-        <div class="category-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">🎓</div>
-        <div class="category-content">
-            <h3 class="category-title">Non-Fiction</h3>
-            <p class="category-description">Learn from real-world insights</p>
-            <span class="category-link">Discover more →</span>
-        </div>
-    </a>
-
-    <a href="{% url 'book_list' %}?sort=bestseller" class="category-card">
-        <div class="category-image" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">⭐</div>
-        <div class="category-content">
-            <h3 class="category-title">Best Sellers</h3>
-            <p class="category-description">Most popular books this month</p>
-            <span class="category-link">View all →</span>
-        </div>
-    </a>
-
-    <a href="{% url 'book_list' %}?sort=new" class="category-card">
-        <div class="category-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">🆕</div>
-        <div class="category-content">
-            <h3 class="category-title">New Releases</h3>
-            <p class="category-description">Latest additions to our library</p>
-            <span class="category-link">Check them out →</span>
-        </div>
-    </a>
-</div>
-
-<!-- Deals of the Day -->
-<div class="deals-section">
-    <h2 class="deals-title">⚡ Deals of the Day</h2>
-    <p class="deals-subtitle">Limited time offers - Hurry up!</p>
-    <div class="deals-timer">
-        <div class="timer-box">
-            <span class="timer-number" id="hours">12</span>
-            <span class="timer-label">Hours</span>
-        </div>
-        <div class="timer-box">
-            <span class="timer-number" id="minutes">34</span>
-            <span class="timer-label">Minutes</span>
-        </div>
-        <div class="timer-box">
-            <span class="timer-number" id="seconds">56</span>
-            <span class="timer-label">Seconds</span>
-        </div>
-    </div>
-    <a href="{% url 'book_list' %}?deals=true" class="slide-btn">View All Deals</a>
-</div>
-
-<!-- Featured Books -->
-<h2 class="section-title">Featured Books</h2>
-<div class="books-grid">
-    <a href="#" class="book-card">
-        <div class="book-image">📚</div>
-        <div class="book-info">
-            <h3 class="book-title">The Midnight Library</h3>
-            <p class="book-author">by Matt Haig</p>
-            <div class="book-rating">
-                <span class="stars">⭐⭐⭐⭐⭐</span>
-                <span class="rating-count">(2,345)</span>
+<div class="section-container">
+    <h2 class="section-heading">Shop by Category</h2>
+    <div class="categories-grid">
+        <a href="{% url 'book_list' %}?category=fiction" class="category-card">
+            <div class="category-image" style="background: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400') center/cover;"></div>
+            <div class="category-info">
+                <h3 class="category-name">Fiction</h3>
+                <p class="category-desc">Explore captivating stories</p>
             </div>
-            <div class="book-price">
-                <span class="current-price">₹299</span>
-                <span class="original-price">₹599</span>
-                <span class="discount-badge">50% OFF</span>
+        </a>
+        <a href="{% url 'book_list' %}?category=non-fiction" class="category-card">
+            <div class="category-image" style="background: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400') center/cover;"></div>
+            <div class="category-info">
+                <h3 class="category-name">Non-Fiction</h3>
+                <p class="category-desc">Real-world insights</p>
             </div>
-        </div>
-    </a>
-
-    <a href="#" class="book-card">
-        <div class="book-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">📖</div>
-        <div class="book-info">
-            <h3 class="book-title">Atomic Habits</h3>
-            <p class="book-author">by James Clear</p>
-            <div class="book-rating">
-                <span class="stars">⭐⭐⭐⭐⭐</span>
-                <span class="rating-count">(5,678)</span>
+        </a>
+        <a href="{% url 'book_list' %}?sort=bestseller" class="category-card">
+            <div class="category-image" style="background: url('https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400') center/cover;"></div>
+            <div class="category-info">
+                <h3 class="category-name">Best Sellers</h3>
+                <p class="category-desc">Most popular titles</p>
             </div>
-            <div class="book-price">
-                <span class="current-price">₹399</span>
-                <span class="original-price">₹699</span>
-                <span class="discount-badge">43% OFF</span>
+        </a>
+        <a href="{% url 'book_list' %}?sort=new" class="category-card">
+            <div class="category-image" style="background: url('https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400') center/cover;"></div>
+            <div class="category-info">
+                <h3 class="category-name">New Releases</h3>
+                <p class="category-desc">Latest additions</p>
             </div>
-        </div>
-    </a>
-
-    <a href="#" class="book-card">
-        <div class="book-image" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">📕</div>
-        <div class="book-info">
-            <h3 class="book-title">The Psychology of Money</h3>
-            <p class="book-author">by Morgan Housel</p>
-            <div class="book-rating">
-                <span class="stars">⭐⭐⭐⭐⭐</span>
-                <span class="rating-count">(3,421)</span>
-            </div>
-            <div class="book-price">
-                <span class="current-price">₹349</span>
-                <span class="original-price">₹599</span>
-                <span class="discount-badge">42% OFF</span>
-            </div>
-        </div>
-    </a>
-
-    <a href="#" class="book-card">
-        <div class="book-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">📗</div>
-        <div class="book-info">
-            <h3 class="book-title">Sapiens</h3>
-            <p class="book-author">by Yuval Noah Harari</p>
-            <div class="book-rating">
-                <span class="stars">⭐⭐⭐⭐⭐</span>
-                <span class="rating-count">(4,567)</span>
-            </div>
-            <div class="book-price">
-                <span class="current-price">₹449</span>
-                <span class="original-price">₹799</span>
-                <span class="discount-badge">44% OFF</span>
-            </div>
-        </div>
-    </a>
-</div>
-
-<!-- Features Section -->
-<div class="features-section">
-    <div class="feature-item">
-        <div class="feature-icon">🔒</div>
-        <h3 class="feature-title">100% Secure Payment</h3>
-        <p class="feature-description">Your transactions are protected with bank-grade encryption</p>
-    </div>
-    <div class="feature-item">
-        <div class="feature-icon">📦</div>
-        <h3 class="feature-title">Fast Delivery</h3>
-        <p class="feature-description">Get your books delivered within 2-5 business days</p>
-    </div>
-    <div class="feature-item">
-        <div class="feature-icon">↩️</div>
-        <h3 class="feature-title">Easy Returns</h3>
-        <p class="feature-description">30-day return policy for all books</p>
-    </div>
-    <div class="feature-item">
-        <div class="feature-icon">💳</div>
-        <h3 class="feature-title">Multiple Payment Options</h3>
-        <p class="feature-description">UPI, Credit/Debit Cards, Net Banking & more</p>
+        </a>
     </div>
 </div>
 
-<!-- Newsletter Section -->
-<div class="newsletter-section">
-    <h2 class="newsletter-title">📬 Join Our Reading Community</h2>
-    <p class="newsletter-subtitle">Get exclusive deals, recommendations & updates</p>
-    <form class="newsletter-form">
-        <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
-        <button type="submit" class="newsletter-button">Subscribe</button>
-    </form>
+<!-- Today's Deals -->
+<div class="deals-banner">
+    <div class="deals-content">
+        <h2 class="deals-title">Today's Deals</h2>
+        <p class="deals-subtitle">Limited time offers</p>
+        <a href="{% url 'book_list' %}" class="deals-btn">See all deals</a>
+    </div>
+</div>
+
+<!-- Trust Badges -->
+<div class="trust-section">
+    <div class="trust-item">
+        <div class="trust-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#232F3E" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+        </div>
+        <div class="trust-text">
+            <h4>Secure Payment</h4>
+            <p>100% protected</p>
+        </div>
+    </div>
+    <div class="trust-item">
+        <div class="trust-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#232F3E" stroke-width="2">
+                <rect x="1" y="3" width="15" height="13"/>
+                <path d="M16 8v10l5-3V5z"/>
+            </svg>
+        </div>
+        <div class="trust-text">
+            <h4>Fast Delivery</h4>
+            <p>3-5 business days</p>
+        </div>
+    </div>
+    <div class="trust-item">
+        <div class="trust-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#232F3E" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+        </div>
+        <div class="trust-text">
+            <h4>Easy Returns</h4>
+            <p>30-day policy</p>
+        </div>
+    </div>
+    <div class="trust-item">
+        <div class="trust-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#232F3E" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+            </svg>
+        </div>
+        <div class="trust-text">
+            <h4>24/7 Support</h4>
+            <p>Always here to help</p>
+        </div>
+    </div>
 </div>
 
 <script>
-    // Slider functionality
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.slider-dot');
-
-    function changeSlide(index) {
-        slides[currentSlide].classList.remove('active');
-        dots[currentSlide].classList.remove('active');
-        currentSlide = index;
-        slides[currentSlide].classList.add('active');
-        dots[currentSlide].classList.add('active');
+// Welcome Modal
+window.onload = function() {
+    if (!sessionStorage.getItem('modalShown')) {
+        document.getElementById('welcomeModal').style.display = 'flex';
+        sessionStorage.setItem('modalShown', 'true');
     }
+}
 
-    // Auto slide
-    setInterval(() => {
-        let nextSlide = (currentSlide + 1) % slides.length;
-        changeSlide(nextSlide);
-    }, 5000);
+function closeModal() {
+    document.getElementById('welcomeModal').style.display = 'none';
+}
 
-    // Countdown Timer
-    function updateTimer() {
-        const now = new Date();
-        const midnight = new Date();
-        midnight.setHours(24, 0, 0, 0);
-        const diff = midnight - now;
+// Slider
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
 
-        const hours = Math.floor(diff / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+function showSlide(n) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    
+    currentSlide = (n + slides.length) % slides.length;
+    
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+}
 
-        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-    }
+function changeSlide(direction) {
+    showSlide(currentSlide + direction);
+}
 
-    updateTimer();
-    setInterval(updateTimer, 1000);
+function goToSlide(n) {
+    showSlide(n);
+}
+
+// Auto slide
+setInterval(() => changeSlide(1), 5000);
 </script>
-
 {% endblock %}

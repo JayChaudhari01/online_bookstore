@@ -490,10 +490,11 @@
     <!-- Secondary Navigation -->
     <div class="secondary-nav">
         <div class="secondary-nav-content">
-            <button class="nav-menu-btn">All</button>
+            <a href="{% url 'book_list' %}" > <button class="nav-menu-btn">All</button></a>
             <a href="{% url 'book_list' %}" class="secondary-nav-link">Best Sellers</a>
             <a href="{% url 'book_list' %}?category=fiction" class="secondary-nav-link">Fiction</a>
             <a href="{% url 'book_list' %}?category=non-fiction" class="secondary-nav-link">Non-Fiction</a>
+            <a href="{% url 'book_list' %}?category=academic" class="secondary-nav-link">Academic</a>
             <a href="{% url 'book_list' %}?sort=new" class="secondary-nav-link">New Releases</a>
             <a href="#" class="secondary-nav-link">Today's Deals</a>
             {% if user.is_authenticated %}
