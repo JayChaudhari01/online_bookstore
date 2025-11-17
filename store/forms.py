@@ -6,6 +6,18 @@ from django.contrib.auth.forms import UserCreationForm
 
 User = get_user_model()  
 
+class CustomUserCreationForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email', 'phone', 
+                  'address', 'city', 'state', 'pincode', 'age', 'profile_picture')
+
+class CustomUserChangeForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email', 'phone', 
+                  'address', 'city', 'state', 'pincode', 'age', 'profile_picture', 
+                  'is_staff', 'is_active')
 
 class BookForm(forms.ModelForm):
     class Meta:

@@ -1,0 +1,150 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/user_profile/style.css' %}">
+{% endblock %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="{% url 'home' %}" class="breadcrumb-link">Home</a>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-current">My Profile</span>
+    </div>
+
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <h1 class="profile-heading">Your Account</h1>
+    </div>
+
+    <div class="profile-layout">
+        <!-- Left Sidebar -->
+        <div class="profile-sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Account</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="{% url 'user_profile' %}" class="sidebar-link active">Profile Information</a></li>
+                    <li><a href="{% url 'my_orders' %}" class="sidebar-link">Your Orders</a></li>
+                    <li><a href="{% url 'view_cart' %}" class="sidebar-link">Your Cart</a></li>
+                    <li><a href="{% url 'logout' %}" class="sidebar-link">Sign Out</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="profile-main">
+            <!-- Profile Card -->
+            <div class="profile-card">
+                <div class="card-header">
+                    <h2 class="card-title">Profile Information</h2>
+                    <a href="{% url 'edit_profile' %}" class="btn-edit">Edit</a>
+                </div>
+
+                <div class="card-body">
+                    <!-- Profile Picture -->
+                    <div class="profile-picture-section">
+                        <div class="profile-avatar">
+                            {% if user.profile_picture %}
+                                <img src="{{ user.profile_picture.url }}" alt="Profile Picture" class="avatar-img">
+                            {% else %}
+                                <div class="avatar-placeholder">
+                                    <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                        <circle cx="12" cy="7" r="4"/>
+                                    </svg>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Profile Details -->
+                    <div class="profile-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Full Name:</span>
+                            <span class="detail-value">{{ user.first_name }} {{ user.last_name }}</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-label">Email:</span>
+                            <span class="detail-value">{{ user.email }}</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-label">Phone Number:</span>
+                            <span class="detail-value">{{ user.phone|default:"Not provided" }}</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-label">Age:</span>
+                            <span class="detail-value">{{ user.age|default:"Not provided" }}</span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-label">Address:</span>
+                            <span class="detail-value">
+                                {% if user.address %}
+                                    {{ user.address }}<br>
+                                    {{ user.city }}, {{ user.state }} {{ user.pincode }}
+                                {% else %}
+                                    Not provided
+                                {% endif %}
+                            </span>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-label">Member Since:</span>
+                            <span class="detail-value">{{ user.date_joined|date:"F Y" }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="quick-links-grid">
+                <a href="{% url 'my_orders' %}" class="quick-link-card">
+                    <div class="quick-link-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#232F3E" stroke-width="2">
+                            <rect x="1" y="3" width="15" height="13"/>
+                            <path d="M16 8v10l5-3V5z"/>
+                        </svg>
+                    </div>
+                    <div class="quick-link-text">
+                        <h4>Your Orders</h4>
+                        <p>Track, return, or buy again</p>
+                    </div>
+                </a>
+
+                <a href="{% url 'edit_profile' %}" class="quick-link-card">
+                    <div class="quick-link-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#232F3E" stroke-width="2">
+                            <path d="M12 20h9"/>
+                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                        </svg>
+                    </div>
+                    <div class="quick-link-text">
+                        <h4>Edit Profile</h4>
+                        <p>Update your information</p>
+                    </div>
+                </a>
+
+                <a href="{% url 'view_cart' %}" class="quick-link-card">
+                    <div class="quick-link-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#232F3E" stroke-width="2">
+                            <circle cx="9" cy="21" r="1"/>
+                            <circle cx="20" cy="21" r="1"/>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                        </svg>
+                    </div>
+                    <div class="quick-link-text">
+                        <h4>Your Cart</h4>
+                        <p>View items in cart</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

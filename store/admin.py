@@ -6,9 +6,23 @@ from .models import User, Category, Book, CartItem, Order, OrderItem
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):
     list_display = ['username', 'email', 'phone', 'first_name', 'last_name', 'is_staff']
+    search_fields = ('username', 'first_name', 'last_name', 'email', 'phone')
+    list_filter = ('is_staff', 'is_superuser', 'is_active', 'date_joined')
+    
+    # UPDATED FIELDSETS - Add new profile fields
     fieldsets = UserAdmin.fieldsets + (
-        ('Additional Info', {'fields': ('phone',)}),
+        ('Profile Information', {
+            'fields': ('phone', 'address', 'city', 'state', 'pincode', 'age', 'profile_picture')
+        }),
     )
+    
+    # For adding new user
+    add_fieldsets = UserAdmin.add_fieldsets + (
+        ('Profile Information', {
+            'fields': ('phone', 'address', 'city', 'state', 'pincode', 'age', 'profile_picture')
+        }),
+    )
+
 
 # Category Admin
 @admin.register(Category)

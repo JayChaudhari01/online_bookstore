@@ -176,6 +176,11 @@ def delete_from_cart(request, item_id):
 @login_required
 def checkout(request):
     cart_items = CartItem.objects.filter(user=request.user)
+    
+    if not cart_items.exists():
+        messages.warning(request, 'Your cart is empty!')
+        return redirect('view_cart')
+    
     total = sum(item.book.price * item.quantity for item in cart_items)
 
     if request.method == "POST":
@@ -212,10 +217,14 @@ def checkout(request):
         messages.success(request, "Your order has been placed successfully!")
         return redirect('order_success')
 
-    return render(request, 'store/checkout.html', {
+    # Pass user data to template for auto-fill
+    context = {
         'cart_items': cart_items,
-        'total': total
-    })
+        'total': total,
+        'user': request.user  # Add this line - User data auto-fill ke liye
+    }
+    
+    return render(request, 'store/checkout.html', context)
 
 
 @login_required
@@ -227,3 +236,50 @@ def my_orders(request):
     orders = Order.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'store/my_orders.html', {'orders': orders})
 
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
+@login_required
+def user_profile(request):
+    """View user profile"""
+    context = {
+        'user': request.user
+    }
+    return render(request, 'store/user_profile.html', context)
+
+@login_required
+def edit_profile(request):
+    """Edit user profile"""
+    if request.method == 'POST':
+        user = request.user
+        
+        # Update user information
+        user.first_name = request.POST.get('first_name', '')
+        user.last_name = request.POST.get('last_name', '')
+        user.email = request.POST.get('email', '')
+        user.phone = request.POST.get('phone', '')
+        user.address = request.POST.get('address', '')
+        user.city = request.POST.get('city', '')
+        user.state = request.POST.get('state', '')
+        user.pincode = request.POST.get('pincode', '')
+        age = request.POST.get('age', '')
+        if age and age.strip():
+         user.age = int(age)
+        else:
+         user.age = None  # ✅ None is valid for nullable fields
+        
+        
+        # Handle profile picture upload
+        if request.FILES.get('profile_picture'):
+            user.profile_picture = request.FILES['profile_picture']
+        
+        user.save()
+        
+        messages.success(request, 'Profile updated successfully!')
+        return redirect('user_profile')
+    
+    context = {
+        'user': request.user
+    }
+    return render(request, 'store/edit_profile.html', context)

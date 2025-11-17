@@ -1,0 +1,309 @@
+/* ===========================
+   EDIT PROFILE PAGE
+=========================== */
+
+/* Container */
+.profile-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #EAEDED;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #565959;
+}
+
+.breadcrumb-link {
+    color: #007185;
+    text-decoration: none;
+}
+
+.breadcrumb-link:hover {
+    color: #C7511F;
+    text-decoration: underline;
+}
+
+.breadcrumb-separator {
+    margin: 0 8px;
+}
+
+.breadcrumb-current {
+    color: #0F1111;
+}
+
+/* Edit Profile Container */
+.edit-profile-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.edit-heading {
+    font-size: 28px;
+    font-weight: 400;
+    color: #0F1111;
+    margin-bottom: 20px;
+}
+
+/* Form Container */
+.edit-form {
+    background: white;
+    border: 1px solid #D5D9D9;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Form Sections */
+.form-section {
+    padding: 25px 30px;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0F1111;
+    margin-bottom: 20px;
+}
+
+/* ===========================
+   PROFILE PICTURE UPLOAD
+=========================== */
+.picture-upload {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.current-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #D5D9D9;
+    flex-shrink: 0;
+}
+
+.preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.preview-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #F0F2F2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-controls {
+    flex: 1;
+}
+
+#profile_picture {
+    display: none;
+}
+
+.btn-upload {
+    display: inline-block;
+    background: white;
+    border: 1px solid #888C8C;
+    color: #0F1111;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-upload:hover {
+    background: #F7F8F8;
+    border-color: #626262;
+}
+
+.upload-hint {
+    font-size: 12px;
+    color: #565959;
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+/* ===========================
+   FORM GRID & INPUTS
+=========================== */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+.form-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0F1111;
+    margin-bottom: 5px;
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #888C8C;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #0F1111;
+    background: white;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: #999;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    outline: 3px solid #007185;
+    outline-offset: -3px;
+    border-color: #007185;
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* ===========================
+   ACTION BUTTONS
+=========================== */
+.form-actions {
+    display: flex;
+    gap: 12px;
+    padding: 25px 30px;
+    background: #F7F8F8;
+}
+
+.btn-save {
+    background: #FFD814;
+    border: 1px solid #FCD200;
+    color: #0F1111;
+    padding: 10px 28px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-save:hover {
+    background: #F7CA00;
+    border-color: #F2C200;
+}
+
+.btn-cancel {
+    background: white;
+    border: 1px solid #888C8C;
+    color: #0F1111;
+    padding: 10px 28px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-block;
+    line-height: 1;
+}
+
+.btn-cancel:hover {
+    background: #F7F8F8;
+    border-color: #626262;
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+=========================== */
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 15px;
+    }
+
+    .edit-heading {
+        font-size: 22px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .picture-upload {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .edit-form {
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
+
+    .form-section {
+        padding: 20px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .btn-save,
+    .btn-cancel {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .edit-heading {
+        font-size: 20px;
+    }
+
+    .section-title {
+        font-size: 15px;
+    }
+
+    .current-picture {
+        width: 90px;
+        height: 90px;
+    }
+
+    .form-section {
+        padding: 15px;
+    }
+
+    .form-actions {
+        padding: 15px;
+    }
+}

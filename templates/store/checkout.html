@@ -31,11 +31,20 @@
                     </div>
 
                     <div class="form-content">
+                        <!-- Use Saved Address Button -->
+                        {% if user.address %}
+                        <div class="saved-address-notice">
+                            <p><strong>Use your saved address?</strong></p>
+                            <button type="button" class="btn-use-saved" onclick="fillSavedAddress()">Use saved address</button>
+                        </div>
+                        {% endif %}
+
                         <div class="form-row">
                             <div class="form-group full">
                                 <label for="full_name" class="field-label">Full name</label>
                                 <input type="text" name="full_name" id="full_name" 
-                                       class="field-input" required>
+                                       class="field-input" 
+                                       value="{{ user.get_full_name }}" required>
                             </div>
                         </div>
 
@@ -43,7 +52,8 @@
                             <div class="form-group full">
                                 <label for="phone" class="field-label">Mobile number</label>
                                 <input type="tel" name="phone" id="phone" 
-                                       class="field-input" placeholder="10-digit mobile number" required>
+                                       class="field-input" placeholder="10-digit mobile number" 
+                                       value="{{ user.phone }}" required>
                             </div>
                         </div>
 
@@ -52,13 +62,15 @@
                                 <label for="pincode" class="field-label">Pincode</label>
                                 <input type="text" name="pincode" id="pincode" 
                                        class="field-input" placeholder="6 digits [0-9] PIN code" 
+                                       value="{{ user.pincode }}" 
                                        maxlength="6" required>
                             </div>
 
                             <div class="form-group half">
                                 <label for="city" class="field-label">Town/City</label>
                                 <input type="text" name="city" id="city" 
-                                       class="field-input" required>
+                                       class="field-input" 
+                                       value="{{ user.city }}" required>
                             </div>
                         </div>
 
@@ -68,7 +80,7 @@
                                 <textarea name="address" id="address" 
                                           class="field-textarea" rows="3" 
                                           placeholder="Flat, House no., Building, Company, Apartment" 
-                                          required></textarea>
+                                          required>{{ user.address }}</textarea>
                             </div>
                         </div>
                     </div>
@@ -190,4 +202,13 @@
     </div>
     {% endif %}
 </div>
+
+<script>
+// Fill saved address from profile
+function fillSavedAddress() {
+    // Already pre-filled via Django template variables
+    // This function is just for the button feedback
+    alert('Address fields are already filled with your saved information!');
+}
+</script>
 {% endblock %}

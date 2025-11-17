@@ -455,7 +455,7 @@
             <!-- Right Nav Items -->
             <div class="nav-right">
                 {% if user.is_authenticated %}
-                    <a href="{% url 'my_orders' %}" class="nav-item">
+                    <a href="{% url 'user_profile' %}" class="nav-item">
                         <span class="nav-item-label">Hello, {{ user.username }}</span>
                         <span class="nav-item-text">Account & Lists</span>
                     </a>

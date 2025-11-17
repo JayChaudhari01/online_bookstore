@@ -1,0 +1,142 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/edit_profile/style.css' %}">
+{% endblock %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="{% url 'home' %}" class="breadcrumb-link">Home</a>
+        <span class="breadcrumb-separator">›</span>
+        <a href="{% url 'user_profile' %}" class="breadcrumb-link">Profile</a>
+        <span class="breadcrumb-separator">›</span>
+        <span class="breadcrumb-current">Edit Profile</span>
+    </div>
+
+    <!-- Edit Form -->
+    <div class="edit-profile-container">
+        <h1 class="edit-heading">Edit Your Profile</h1>
+
+        <form method="post" enctype="multipart/form-data" class="edit-form">
+            {% csrf_token %}
+
+            <!-- Profile Picture Upload -->
+            <div class="form-section">
+                <h3 class="section-title">Profile Picture</h3>
+                <div class="picture-upload">
+                    <div class="current-picture">
+                        {% if user.profile_picture %}
+                            <img src="{{ user.profile_picture.url }}" alt="Profile" class="preview-img" id="imagePreview">
+                        {% else %}
+                            <div class="preview-placeholder" id="imagePreview">
+                                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="upload-controls">
+                        <label for="profile_picture" class="btn-upload">Choose Photo</label>
+                        <input type="file" id="profile_picture" name="profile_picture" accept="image/*" onchange="previewImage(event)">
+                        <p class="upload-hint">JPG, PNG or GIF. Max size 5MB</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Personal Information -->
+            <div class="form-section">
+                <h3 class="section-title">Personal Information</h3>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="first_name" class="form-label">First Name</label>
+                        <input type="text" id="first_name" name="first_name" class="form-input" 
+                               value="{{ user.first_name }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="last_name" class="form-label">Last Name</label>
+                        <input type="text" id="last_name" name="last_name" class="form-input" 
+                               value="{{ user.last_name }}" required>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" name="email" class="form-input" 
+                               value="{{ user.email }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" class="form-input" 
+                               value="{{ user.phone }}" placeholder="10-digit mobile number">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age" class="form-label">Age</label>
+                        <input type="number" id="age" name="age" class="form-input" 
+                               value="{{ user.age }}" min="1" max="120" placeholder="Your age">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Address Information -->
+            <div class="form-section">
+                <h3 class="section-title">Address Information</h3>
+                
+                <div class="form-grid">
+                    <div class="form-group full">
+                        <label for="address" class="form-label">Address</label>
+                        <textarea id="address" name="address" class="form-textarea" rows="3" 
+                                  placeholder="Flat, House no., Building, Company, Apartment">{{ user.address }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city" class="form-label">City</label>
+                        <input type="text" id="city" name="city" class="form-input" 
+                               value="{{ user.city }}" placeholder="Your city">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="state" class="form-label">State</label>
+                        <input type="text" id="state" name="state" class="form-input" 
+                               value="{{ user.state }}" placeholder="Your state">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pincode" class="form-label">Pincode</label>
+                        <input type="text" id="pincode" name="pincode" class="form-input" 
+                               value="{{ user.pincode }}" placeholder="6 digits PIN code" maxlength="6">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="form-actions">
+                 <button type="submit" class="btn-save">Save Changes</button>
+                <a href="{% url 'user_profile' %}" class="btn-cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function previewImage(event) {
+    const preview = document.getElementById('imagePreview');
+    const file = event.target.files[0];
+    
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.innerHTML = '<img src="' + e.target.result + '" alt="Preview" class="preview-img">';
+        }
+        reader.readAsDataURL(file);
+    }
+}
+</script>
+{% endblock %}
